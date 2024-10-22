@@ -1,0 +1,37 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://qo2mgusrsbeq"]
+
+[ext_resource type="Texture2D" uid="uid://byttkraiiwqpj" path="res://assets/sprite/Vector/overview.svg" id="1_b8vbf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wi7b"]
+texture = ExtResource("1_b8vbf")
+margins = Vector2i(70, 0)
+separation = Vector2i(10, 10)
+texture_region_size = Vector2i(80, 80)
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d2wmu"]
+texture = ExtResource("1_b8vbf")
+margins = Vector2i(70, 40)
+separation = Vector2i(10, 10)
+texture_region_size = Vector2i(80, 40)
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+6:10/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bevko"]
+texture = ExtResource("1_b8vbf")
+separation = Vector2i(10, 10)
+texture_region_size = Vector2i(80, 80)
+6:6/0 = 0
+7:6/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_0wi7b")
+sources/1 = SubResource("TileSetAtlasSource_d2wmu")
+sources/2 = SubResource("TileSetAtlasSource_bevko")

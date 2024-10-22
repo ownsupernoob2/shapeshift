@@ -1,0 +1,206 @@
+[gd_scene load_steps=25 format=3 uid="uid://bf0uu6nnkd4nd"]
+
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_08tva"]
+[ext_resource type="Script" path="res://menu.gd" id="1_26sb4"]
+[ext_resource type="Texture2D" uid="uid://bwab3atf26365" path="res://assets/options_menu.tres" id="2_h7tyk"]
+[ext_resource type="Texture2D" uid="uid://bwv7nmp827wf8" path="res://assets/sprite/PNG/Default/blue_body_circle.png" id="2_ye2k5"]
+[ext_resource type="Theme" uid="uid://e1cukr0ffdpe" path="res://assets/menu.tres" id="2_ykeky"]
+[ext_resource type="Texture2D" uid="uid://cxyu040dcwlkr" path="res://assets/sprite/PNG/Default/face_a.png" id="3_768e0"]
+[ext_resource type="Texture2D" uid="uid://u1uedb7n7svi" path="res://assets/sprite/PNG/Default/tile_half_left.png" id="5_hpyn8"]
+[ext_resource type="Texture2D" uid="uid://dte18mhb6sgvi" path="res://assets/sprite/PNG/Default/yellow_body_rhombus.png" id="6_6kljb"]
+[ext_resource type="Texture2D" uid="uid://cnm04kmxvmyof" path="res://assets/sprite/PNG/Default/hand_yellow_open.png" id="7_hrf5t"]
+[ext_resource type="Texture2D" uid="uid://bfvh1ev3gjfa" path="res://assets/sprite/PNG/Default/face_b.png" id="8_333v2"]
+[ext_resource type="Texture2D" uid="uid://lmfx7fhhvi8i" path="res://assets/sprite/PNG/Default/hand_yellow_point.png" id="9_ngo4u"]
+[ext_resource type="Texture2D" uid="uid://1gptmyhlheip" path="res://assets/sprite/PNG/Default/red_body_square.png" id="10_y67q4"]
+[ext_resource type="Texture2D" uid="uid://bf2qb5lxbicev" path="res://assets/sprite/PNG/Default/face_f.png" id="11_ehcq7"]
+[ext_resource type="Texture2D" uid="uid://mmjohebv46jf" path="res://assets/sprite/PNG/Default/tile_half_right.png" id="12_0jl6a"]
+[ext_resource type="Texture2D" uid="uid://dj8kb22sjjnvd" path="res://assets/sprite/PNG/Default/tile_background_tree_small.png" id="13_b4hl8"]
+[ext_resource type="Texture2D" uid="uid://dqh5db3rwloxw" path="res://assets/sprite/PNG/Default/tile_cloud.png" id="14_jb4yl"]
+[ext_resource type="Texture2D" uid="uid://dp1yc3mdfy5a2" path="res://assets/sprite/PNG/Default/tile_background_grass.png" id="15_ikfv6"]
+[ext_resource type="Texture2D" uid="uid://c6b472ybj7uvf" path="res://assets/sprite/PNG/Default/tile_left.png" id="16_jsoto"]
+[ext_resource type="Texture2D" uid="uid://bvoanjpbjct16" path="res://assets/sprite/PNG/Default/tile_right.png" id="17_tumst"]
+[ext_resource type="Texture2D" uid="uid://b7vtdo520wor6" path="res://assets/sprite/PNG/Default/tile_coin.png" id="18_xoemy"]
+[ext_resource type="AudioStream" uid="uid://b8no8f8watl86" path="res://assets/sfx/click.wav" id="20_in35t"]
+
+[sub_resource type="Theme" id="Theme_yeaqk"]
+
+[sub_resource type="Theme" id="Theme_3sjor"]
+VBoxContainer/constants/separation = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_t5aq1"]
+font = ExtResource("1_08tva")
+font_size = 120
+shadow_size = 30
+shadow_color = Color(0.204953, 0.480616, 0.455556, 0.682353)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_26sb4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 816.0
+offset_bottom = 488.0
+scale = Vector2(1.00567, 0.995367)
+texture = ExtResource("2_h7tyk")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 357.0
+offset_top = 226.0
+offset_right = 475.0
+offset_bottom = 461.0
+theme = SubResource("Theme_yeaqk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_3sjor")
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_ykeky")
+text = "PLAY
+"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_ykeky")
+text = "OPTIONS
+"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_ykeky")
+text = "EXIT"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 62.0
+offset_right = 735.0
+offset_bottom = 222.0
+text = "SHAPESHIFT"
+label_settings = SubResource("LabelSettings_t5aq1")
+
+[node name="circle" type="Node2D" parent="."]
+position = Vector2(141, 154)
+rotation = -2.50284
+
+[node name="BlueBodyCircle" type="Sprite2D" parent="circle"]
+position = Vector2(19.3144, 100.275)
+rotation = 3.20868
+texture = ExtResource("2_ye2k5")
+offset = Vector2(1, 1)
+
+[node name="FaceA" type="Sprite2D" parent="circle"]
+position = Vector2(18.3287, 97.2706)
+rotation = 3.13331
+texture = ExtResource("3_768e0")
+offset = Vector2(0.108093, 1.02103)
+
+[node name="TileHalfLeft" type="Sprite2D" parent="circle"]
+position = Vector2(-79.9639, -218.382)
+rotation = 2.94959
+texture = ExtResource("5_hpyn8")
+
+[node name="rombus" type="Node2D" parent="."]
+position = Vector2(131, 31)
+
+[node name="YellowBodyRhombus" type="Sprite2D" parent="rombus"]
+position = Vector2(525, 206)
+rotation = -0.436175
+texture = ExtResource("6_6kljb")
+
+[node name="HandYellowOpen" type="Sprite2D" parent="rombus"]
+position = Vector2(579, 145)
+texture = ExtResource("7_hrf5t")
+
+[node name="FaceB" type="Sprite2D" parent="rombus"]
+position = Vector2(526, 207)
+rotation = -0.504573
+texture = ExtResource("8_333v2")
+
+[node name="HandYellowPoint" type="Sprite2D" parent="rombus"]
+position = Vector2(441, 224)
+rotation = -2.33757
+texture = ExtResource("9_ngo4u")
+
+[node name="square" type="Node2D" parent="."]
+
+[node name="RedBodySquare" type="Sprite2D" parent="square"]
+position = Vector2(645, 58)
+rotation = -0.10225
+texture = ExtResource("10_y67q4")
+
+[node name="FaceF" type="Sprite2D" parent="square"]
+position = Vector2(645, 58)
+rotation = -0.0970883
+texture = ExtResource("11_ehcq7")
+
+[node name="stuff" type="Node2D" parent="."]
+
+[node name="TileHalfRight" type="Sprite2D" parent="stuff"]
+position = Vector2(147, 412)
+rotation = 0.456021
+texture = ExtResource("12_0jl6a")
+
+[node name="TileBackgroundTreeSmall" type="Sprite2D" parent="stuff"]
+position = Vector2(102, 308)
+rotation = 0.460248
+texture = ExtResource("13_b4hl8")
+
+[node name="TileCloud" type="Sprite2D" parent="stuff"]
+position = Vector2(757, 77)
+texture = ExtResource("14_jb4yl")
+
+[node name="TileCloud2" type="Sprite2D" parent="stuff"]
+position = Vector2(65, 106)
+texture = ExtResource("14_jb4yl")
+
+[node name="TileCloud3" type="Sprite2D" parent="stuff"]
+position = Vector2(43.25, 160)
+scale = Vector2(0.7125, 0.7)
+texture = ExtResource("14_jb4yl")
+
+[node name="TileCloud3" type="Sprite2D" parent="stuff/TileCloud3"]
+position = Vector2(1020, -12.8571)
+scale = Vector2(0.7125, 0.7)
+texture = ExtResource("14_jb4yl")
+
+[node name="TileBackgroundGrass" type="Sprite2D" parent="stuff"]
+position = Vector2(105, 364)
+rotation = 0.490525
+scale = Vector2(0.790453, 0.633392)
+texture = ExtResource("15_ikfv6")
+
+[node name="TileLeft" type="Sprite2D" parent="stuff"]
+position = Vector2(655.348, 399.348)
+rotation = -0.504272
+texture = ExtResource("16_jsoto")
+
+[node name="TileRight" type="Sprite2D" parent="stuff"]
+position = Vector2(724.348, 361.348)
+rotation = -0.504272
+texture = ExtResource("17_tumst")
+
+[node name="TileCoin" type="Sprite2D" parent="stuff"]
+position = Vector2(625, 336)
+texture = ExtResource("18_xoemy")
+
+[node name="TileBackgroundGrass2" type="Sprite2D" parent="stuff"]
+position = Vector2(707, 316)
+rotation = -0.480252
+texture = ExtResource("15_ikfv6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_in35t")
+bus = &"SFX"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

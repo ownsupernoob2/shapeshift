@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://kjen34bt1yum"]
+
+[ext_resource type="Script" path="res://script/Platform.gd" id="1_5k0de"]
+[ext_resource type="TileSet" uid="uid://qo2mgusrsbeq" path="res://assets/sprite/new_tile_set.tres" id="2_xuqh4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy3bh"]
+resource_local_to_scene = true
+size = Vector2(74.4387, 10)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_11ri7"]
+
+[node name="MovingPlatform" type="Node2D"]
+
+[node name="Platform" type="AnimatableBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(-2.86102e-06, -5)
+scale = Vector2(1.07471, 1)
+shape = SubResource("RectangleShape2D_gy3bh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform" node_paths=PackedStringArray("marker")]
+root_node = NodePath("../..")
+libraries = {
+"Platforms": SubResource("AnimationLibrary_11ri7")
+}
+script = ExtResource("1_5k0de")
+speed = 0.2
+marker = NodePath("../../MoveLocation")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Platform"]
+position = Vector2(20, 57)
+scale = Vector2(0.25, 0.25)
+tile_map_data = PackedByteArray(0, 0, 243, 255, 240, 255, 1, 0, 7, 0, 10, 0, 0, 0, 248, 255, 240, 255, 1, 0, 8, 0, 10, 0, 0, 0, 2, 0, 240, 255, 1, 0, 9, 0, 10, 0, 0, 0, 253, 255, 240, 255, 1, 0, 8, 0, 10, 0, 0, 0)
+tile_set = ExtResource("2_xuqh4")
+
+[node name="MoveLocation" type="Marker2D" parent="."]

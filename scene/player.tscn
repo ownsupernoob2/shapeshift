@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=3 uid="uid://dm8pfg3wjkktn"]
+
+[ext_resource type="Script" path="res://script/player.gd" id="1_cda01"]
+[ext_resource type="Texture2D" uid="uid://bwv7nmp827wf8" path="res://assets/sprite/PNG/Default/blue_body_circle.png" id="2_f3mvf"]
+[ext_resource type="Texture2D" uid="uid://cxyu040dcwlkr" path="res://assets/sprite/PNG/Default/face_a.png" id="3_730ij"]
+[ext_resource type="Texture2D" uid="uid://1gptmyhlheip" path="res://assets/sprite/PNG/Default/red_body_square.png" id="3_mlhxm"]
+[ext_resource type="Texture2D" uid="uid://dte18mhb6sgvi" path="res://assets/sprite/PNG/Default/yellow_body_rhombus.png" id="4_l1sao"]
+[ext_resource type="Texture2D" uid="uid://bf2qb5lxbicev" path="res://assets/sprite/PNG/Default/face_f.png" id="6_3gpkc"]
+[ext_resource type="Texture2D" uid="uid://bfvh1ev3gjfa" path="res://assets/sprite/PNG/Default/face_b.png" id="7_fa81w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq858"]
+size = Vector2(4.99107, 5.1464)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3xa1c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f3mvf")
+}],
+"loop": true,
+"name": &"circle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mlhxm")
+}],
+"loop": true,
+"name": &"square",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_l1sao")
+}],
+"loop": true,
+"name": &"triangle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ucwde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_730ij")
+}],
+"loop": true,
+"name": &"circle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_3gpkc")
+}],
+"loop": true,
+"name": &"square",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fa81w")
+}],
+"loop": true,
+"name": &"triangle",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(2.80501, 2.72035)
+collision_layer = 2
+collision_mask = 3
+wall_min_slide_angle = 0.0
+platform_on_leave = 2
+script = ExtResource("1_cda01")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.06247e-08, -9.85979e-08)
+shape = SubResource("RectangleShape2D_vq858")
+
+[node name="Raycasts" type="Node2D" parent="."]
+position = Vector2(-1.90735e-06, 0)
+
+[node name="RayUp" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(2.13903, -7.71959)
+
+[node name="RayUp2" type="RayCast2D" parent="Raycasts"]
+position = Vector2(1.90735e-06, 0)
+target_position = Vector2(-2.13903, -7.71959)
+
+[node name="RayDown" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(2.13903, 7.71959)
+
+[node name="RayDown2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-2.13903, 7.71959)
+
+[node name="RayLeft" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-7.4866, -2.2056)
+
+[node name="RayLeft2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-7.4866, 2.2056)
+
+[node name="RayRight" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(7.48661, -2.2056)
+
+[node name="RayRight2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(7.48661, 2.2056)
+
+[node name="StateChangeTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+
+[node name="DashTimeout" type="Timer" parent="."]
+
+[node name="DashEndTimer" type="Timer" parent="."]
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.04308e-07, -1.04308e-07)
+scale = Vector2(0.0623884, 0.06433)
+sprite_frames = SubResource("SpriteFrames_3xa1c")
+animation = &"circle"
+autoplay = "circle"
+
+[node name="Face" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.49012e-07, -7.45058e-09)
+scale = Vector2(0.071301, 0.0760551)
+sprite_frames = SubResource("SpriteFrames_ucwde")
+animation = &"circle"
+autoplay = "circle"
+
+[connection signal="timeout" from="StateChangeTimer" to="." method="_onStateChangeTimer_timeout"]
+[connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]

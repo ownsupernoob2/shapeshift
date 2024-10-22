@@ -1,0 +1,82 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://e1cukr0ffdpe"]
+
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_bgi1j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nd2f7"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.0398327, 0.483986, 0.827595, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 30.0
+expand_margin_top = 3.0
+expand_margin_right = 30.0
+expand_margin_bottom = 3.0
+shadow_color = Color(0.0347011, 0.341988, 0.394267, 0.796078)
+shadow_size = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf8dy"]
+bg_color = Color(1, 1, 1, 0.921569)
+border_width_left = 5
+border_width_bottom = 5
+border_color = Color(0, 0.517647, 0.517647, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 30.0
+expand_margin_top = 3.0
+expand_margin_right = 30.0
+expand_margin_bottom = 3.0
+shadow_color = Color(0, 0.517647, 0.517647, 1)
+shadow_size = 5
+shadow_offset = Vector2(5, -5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub85w"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_bottom = 5
+border_color = Color(0, 0.517647, 0.517647, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 30.0
+expand_margin_top = 3.0
+expand_margin_right = 30.0
+expand_margin_bottom = 3.0
+shadow_color = Color(3.27289e-06, 0.453549, 0.477849, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kqhu"]
+bg_color = Color(1, 1, 1, 0.854902)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(9.62615e-08, 0.498773, 0.473068, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 25.0
+expand_margin_top = 1.0
+expand_margin_right = 25.0
+expand_margin_bottom = 1.0
+
+[resource]
+Button/colors/font_color = Color(3.56168e-06, 0.51753, 0.51753, 1)
+Button/colors/font_focus_color = Color(0, 0.517647, 0.517647, 1)
+Button/colors/font_hover_color = Color(0, 0.517647, 0.517647, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0.517647, 0.517647, 1)
+Button/colors/font_pressed_color = Color(0, 0.517647, 0.517647, 1)
+Button/font_sizes/font_size = 29
+Button/fonts/font = ExtResource("1_bgi1j")
+Button/styles/focus = SubResource("StyleBoxFlat_nd2f7")
+Button/styles/hover = SubResource("StyleBoxFlat_jf8dy")
+Button/styles/normal = SubResource("StyleBoxFlat_ub85w")
+Button/styles/pressed = SubResource("StyleBoxFlat_5kqhu")
