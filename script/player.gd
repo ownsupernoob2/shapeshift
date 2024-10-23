@@ -76,13 +76,13 @@ func _physics_process(delta: float) -> void:
 	
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
-		if type == Types.SQUARE:
-			set_collision_mask_value(1, false) 
-
-		else:
-			set_collision_mask_value(1, true) 
-		#if c.get_collider() is RigidBody2D and type == Types.SQUARE:
-			#c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+		#if type == Types.SQUARE:
+			#set_collision_mask_value(1, false) 
+#
+		#else:
+			#set_collision_mask_value(1, true) 
+		if c.get_collider() is RigidBody2D and type == Types.SQUARE:
+			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 func _process_input(delta: float):
 	if Input.is_action_just_pressed("e"):

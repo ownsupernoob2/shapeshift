@@ -120,6 +120,18 @@ metadata/_edit_use_anchors_ = true
 [node name="Player2" parent="." groups=["Rigidbody"] instance=ExtResource("2_12sbv")]
 position = Vector2(422, 328)
 safe_margin = 0.9
+speed = 130.0
+push_force = 100.0
+MAX_SPEED = 30.0
+jump_speed = -160.0
+gravity_speed = 170.0
+MAX_FALL = 10.0
+MAX_DASH = 2.0
+DASH_MODIFIER = 1.5
+DASH_SPEED = Vector2(300, 300)
+acceleration = 700
+deceleration = 70
+jump_force = 180
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(405, 242)

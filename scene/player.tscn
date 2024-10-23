@@ -69,6 +69,7 @@ animations = [{
 scale = Vector2(2.80501, 2.72035)
 collision_layer = 2
 collision_mask = 3
+slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 platform_on_leave = 2
 script = ExtResource("1_cda01")
