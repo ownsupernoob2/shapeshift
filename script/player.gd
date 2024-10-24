@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 		#else:
 			#set_collision_mask_value(1, true) 
 		if c.get_collider() is RigidBody2D and type == Types.SQUARE:
-			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+			c.get_collider().apply_central_force(-c.get_normal() * 5000)
 
 func _process_input(delta: float):
 	if Input.is_action_just_pressed("e"):
