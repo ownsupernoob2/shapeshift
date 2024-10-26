@@ -8,9 +8,10 @@ size = Vector2(20, 38)
 [sub_resource type="LabelSettings" id="LabelSettings_rd1am"]
 font = ExtResource("1_2y2te")
 font_size = 200
-font_color = Color(0.190762, 0.190762, 0.190762, 1)
 
 [node name="Door" type="Area2D"]
+collision_layer = 7
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mypeg")

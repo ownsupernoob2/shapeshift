@@ -32,10 +32,11 @@ var state_timeout = false
 var dash_timeout = false
 var dash_charge = 0
 var charging = false
-
+@onready var death_timer: Timer = $DeathTimer
 @onready var key_drop_timer: Timer = $"../KeyDropTimer"
 var key_node: Node2D = null
 const OFF_SCREEN_POSITION = Vector2(-1000, -1000)
+@onready var walk: CPUParticles2D = $walk
 
 enum Types {
 	SQUARE,
@@ -63,26 +64,34 @@ enum Actions {
 }
 
 func _physics_process(delta: float) -> void:
-	if dead:
-		print("hi")
-		return
-	_process_input(delta)
-	_process_gravity()
-	velocity += gravity * delta
-	move_and_slide()
-	#_process_collisions()
-	_update_state()
-	_process_animation(delta)
 	
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		#if type == Types.SQUARE:
-			#set_collision_mask_value(1, false) 
+	if dead != true:
+		if is_on_floor():
+			walk.emitting = true
+		else:
+			walk.emitting = false
+		_process_input(delta)
+		_process_gravity()
+		velocity += gravity * delta
+		move_and_slide()
+		#_process_collisions()
+		_update_state()
+		_process_animation(delta)
+	
+		for i in get_slide_collision_count():
+			var c = get_slide_collision(i)
+			if type == Types.SQUARE:
+				set_collision_mask_value(1, false) 
+			else:
+				set_collision_mask_value(1, true) 
+		#if c.get_collider() is RigidBody2D and type == Types.SQUARE:
+			#var box = c.get_collider()
+			#
+			#box.apply_central_force(-c.get_normal() * 5000)
+			#
 #
-		#else:
-			#set_collision_mask_value(1, true) 
-		if c.get_collider() is RigidBody2D and type == Types.SQUARE:
-			c.get_collider().apply_central_force(-c.get_normal() * 5000)
+			#if box.linear_velocity.length() > 5:
+				#box.linear_velocity = box.linear_velocity.normalized() * 5
 
 func _process_input(delta: float):
 	if Input.is_action_just_pressed("e"):
@@ -227,6 +236,12 @@ func _process_collisions():
 		var collision = get_slide_collision(i)
 
 func die():
+	dead = true
+	face.play("dead")
+	$Explosion.emitting = true
+	$ExplosionSFX.play()
+	
+	death_timer.start()
 	print("u died")
 
 func _enter_state(new_state):
@@ -272,9 +287,9 @@ func _process_animation(delta: float):
 
 func _on_kill_body_entered(body: Node2D) -> void:
 	print("bruh?")
-	if (body.name == "Player2"):
-		get_tree().reload_current_scene()
-		
+	if (body == self):
+		die()
+
 func _on_key_body_entered(body: Node2D) -> void:
 	print("Key body entered by: ", body.name)
 	if can_pickup_key and body == self and not has_key:
@@ -291,28 +306,35 @@ func _on_key_body_entered(body: Node2D) -> void:
 		
 		emit_signal("key_picked_up")
 		print("Key picked up: ", has_key)
+		$KeySFX.play()
 	else:
 		print("Cannot pick up key. can_pickup_key: ", can_pickup_key, ", body is self: ", body == self, ", has_key: ", has_key)
 
 func switch_type(new_type):
-	if has_key:
-		drop_key()
-	
-	type = new_type
-	
-	match new_type:
-		Types.CIRCLE:
-			body.play("circle")
-			face.play("circle")
-			speed = 100
-		Types.SQUARE:
-			body.play("square")
-			face.play("square")
-			speed = 50
-		Types.TRIANGLE:
-			body.play("triangle")
-			face.play("triangle")
-			speed = 100
+	if $Switch.finished:
+		if has_key:
+			drop_key()
+		
+		type = new_type
+		
+		match new_type:
+			Types.CIRCLE:
+				walk.color = Color(0.373,0.569,1)
+				body.play("circle")
+				face.play("circle")
+				speed = 100
+			Types.SQUARE:
+				walk.color = Color(1,0,0.11)
+				body.play("square")
+				face.play("square")
+				speed = 50
+			Types.TRIANGLE:
+				walk.color = Color(0.983,0.769,0)
+				body.play("triangle")
+				face.play("triangle")
+				speed = 100
+	$Switch.play()
+
 
 func drop_key():
 	if has_key and key_node:
@@ -325,3 +347,13 @@ func drop_key():
 
 func _on_key_drop_timer_timeout():
 	can_pickup_key = true
+
+
+func _on_death_timer_timeout() -> void:
+	get_tree().reload_current_scene()
+
+
+func _on_door_body_entered(body: Node2D) -> void:
+	if has_key and body == self:
+		$CompleteSFX.play()
+		pass

@@ -4527,8 +4527,7 @@ sources/0 = SubResource("TileSetAtlasSource_63qil")
 
 [node name="Box" type="RigidBody2D"]
 collision_mask = 3
-can_sleep = false
-max_contacts_reported = 1
+max_contacts_reported = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(436, 304)
