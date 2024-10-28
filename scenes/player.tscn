@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://dm8pfg3wjkktn"]
 
-[ext_resource type="Script" path="res://script/player.gd" id="1_cda01"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_cda01"]
 [ext_resource type="Texture2D" uid="uid://bwv7nmp827wf8" path="res://assets/sprite/PNG/Default/blue_body_circle.png" id="2_f3mvf"]
 [ext_resource type="Texture2D" uid="uid://cxyu040dcwlkr" path="res://assets/sprite/PNG/Default/face_a.png" id="3_730ij"]
 [ext_resource type="Texture2D" uid="uid://1gptmyhlheip" path="res://assets/sprite/PNG/Default/red_body_square.png" id="3_mlhxm"]
@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dvq32k341beov" path="res://assets/sfx/complete.wav" id="9_6l3uk"]
 [ext_resource type="AudioStream" uid="uid://c3y8bvkkrwrf" path="res://assets/sfx/coin.wav" id="10_k0agf"]
 [ext_resource type="AudioStream" uid="uid://bu4bex5h2ajts" path="res://assets/sfx/switch.wav" id="12_wy5tr"]
-[ext_resource type="PackedScene" uid="uid://ccrgnrtuwo3lf" path="res://scene/health_bar.tscn" id="13_kwfim"]
+[ext_resource type="PackedScene" uid="uid://ccrgnrtuwo3lf" path="res://scenes/delay_bar.tscn" id="13_kwfim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq858"]
 size = Vector2(4.99107, 5.1464)

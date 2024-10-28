@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://j0p7n2rkawkm"]
 
-[ext_resource type="Script" path="res://scene/progress_bar.gd" id="1_0r482"]
+[ext_resource type="Script" path="res://scripts/progress_bar.gd" id="1_0r482"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_acura"]
 

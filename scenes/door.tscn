@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://gyclghbovt4d"]
+[gd_scene load_steps=5 format=3 uid="uid://gyclghbovt4d"]
 
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_2y2te"]
+[ext_resource type="Script" path="res://scripts/speedrun.gd" id="2_3toox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mypeg"]
 size = Vector2(20, 38)
@@ -12,6 +13,7 @@ font_size = 200
 [node name="Door" type="Area2D"]
 collision_layer = 7
 collision_mask = 3
+script = ExtResource("2_3toox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mypeg")
@@ -31,3 +33,13 @@ offset_bottom = 223.0
 scale = Vector2(0.083637, 0.0816666)
 text = "EXIT"
 label_settings = SubResource("LabelSettings_rd1am")
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = -18.0
+offset_top = -62.0
+offset_right = 22.0
+offset_bottom = -39.0
+text = "1.00"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdwfvn5f8b1uw"]
+
+[ext_resource type="Script" path="res://scripts/complete_screen.gd" id="1_gd6c3"]
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="2_w3eui"]
+[ext_resource type="Theme" uid="uid://e1cukr0ffdpe" path="res://assets/texture/menu.tres" id="3_q6efi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5dgk0"]
+font = ExtResource("2_w3eui")
+font_size = 120
+
+[sub_resource type="LabelSettings" id="LabelSettings_e4uxu"]
+font = ExtResource("2_w3eui")
+font_size = 30
+
+[node name="CompleteScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gd6c3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+offset_left = 121.0
+offset_top = 64.0
+offset_right = 346.0
+offset_bottom = 216.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+offset_left = 53.0
+offset_top = 12.0
+offset_right = 804.0
+offset_bottom = 172.0
+scale = Vector2(0.16, 0.16)
+text = "= COMPLETE ="
+label_settings = SubResource("LabelSettings_5dgk0")
+
+[node name="ExitButton" type="Button" parent="Panel"]
+layout_mode = 2
+offset_left = 87.0
+offset_top = 111.0
+offset_right = 217.0
+offset_bottom = 155.0
+scale = Vector2(0.362132, 0.399677)
+theme = ExtResource("3_q6efi")
+text = "EXIT"
+
+[node name="ResumeButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 78.0
+offset_right = 170.0
+offset_bottom = 122.0
+scale = Vector2(0.362132, 0.399677)
+theme = ExtResource("3_q6efi")
+text = "REDO"
+
+[node name="NextButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 78.0
+offset_right = 266.0
+offset_bottom = 122.0
+scale = Vector2(0.362132, 0.399677)
+theme = ExtResource("3_q6efi")
+text = "NEXT"
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 38.0
+offset_right = 205.0
+offset_bottom = 79.0
+scale = Vector2(0.30072, 0.292961)
+text = "0.00 sec"
+label_settings = SubResource("LabelSettings_e4uxu")
+
+[connection signal="pressed" from="Panel/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Panel/ResumeButton" to="." method="_on_resume_button_pressed"]

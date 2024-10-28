@@ -2,9 +2,9 @@
 
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_08tva"]
 [ext_resource type="Script" path="res://menu.gd" id="1_26sb4"]
-[ext_resource type="Texture2D" uid="uid://bwab3atf26365" path="res://assets/options_menu.tres" id="2_h7tyk"]
+[ext_resource type="Texture2D" uid="uid://bwab3atf26365" path="res://assets/texture/options_menu.tres" id="2_h7tyk"]
 [ext_resource type="Texture2D" uid="uid://bwv7nmp827wf8" path="res://assets/sprite/PNG/Default/blue_body_circle.png" id="2_ye2k5"]
-[ext_resource type="Theme" uid="uid://e1cukr0ffdpe" path="res://assets/menu.tres" id="2_ykeky"]
+[ext_resource type="Theme" uid="uid://e1cukr0ffdpe" path="res://assets/texture/menu.tres" id="2_ykeky"]
 [ext_resource type="Texture2D" uid="uid://cxyu040dcwlkr" path="res://assets/sprite/PNG/Default/face_a.png" id="3_768e0"]
 [ext_resource type="Texture2D" uid="uid://u1uedb7n7svi" path="res://assets/sprite/PNG/Default/tile_half_left.png" id="5_hpyn8"]
 [ext_resource type="Texture2D" uid="uid://dte18mhb6sgvi" path="res://assets/sprite/PNG/Default/yellow_body_rhombus.png" id="6_6kljb"]

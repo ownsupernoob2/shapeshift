@@ -1,14 +1,14 @@
-[gd_scene load_steps=15 format=4 uid="uid://cwid3bke3mkb"]
+[gd_scene load_steps=15 format=3 uid="uid://cwid3bke3mkb"]
 
-[ext_resource type="Script" path="res://script/demo.gd" id="1_rperw"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_0urae"]
 [ext_resource type="Texture2D" uid="uid://uwdhg5eo2q83" path="res://assets/sprite/brick-1.png" id="2_lym6p"]
-[ext_resource type="Script" path="res://scene/levels/name.gd" id="3_2gx3x"]
-[ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scene/player.tscn" id="3_a6ri6"]
-[ext_resource type="TileSet" uid="uid://qo2mgusrsbeq" path="res://assets/sprite/new_tile_set.tres" id="4_fkkk8"]
-[ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scene/door.tscn" id="7_2qh6m"]
+[ext_resource type="Script" path="res://scenes/levels/name.gd" id="3_2gx3x"]
+[ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scenes/player.tscn" id="3_a6ri6"]
+[ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scenes/door.tscn" id="7_2qh6m"]
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="7_u40l7"]
-[ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scene/kill.tscn" id="8_klevp"]
-[ext_resource type="PackedScene" uid="uid://bqccgddbbgo7m" path="res://scene/Speedrun.tscn" id="9_mdef3"]
+[ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="8_2g1v6"]
+[ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scenes/kill.tscn" id="8_klevp"]
+[ext_resource type="PackedScene" uid="uid://cdwfvn5f8b1uw" path="res://scenes/complete_screen.tscn" id="8_st7np"]
 
 [sub_resource type="Gradient" id="Gradient_d77vw"]
 offsets = PackedFloat32Array(0, 0.5, 0.954545, 0.967532, 1)
@@ -30,8 +30,10 @@ font_size = 70
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58imm"]
 size = Vector2(517.818, 20)
 
-[node name="Game" type="Node2D"]
-script = ExtResource("1_rperw")
+[node name="GameManager" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_0urae")
+current_level = 1
 
 [node name="Level 1" type="Node2D" parent="."]
 process_mode = 1
@@ -55,8 +57,6 @@ R TO RESET
 
 GOAL: ESCAPE"
 label_settings = SubResource("LabelSettings_ih4p6")
-
-[node name="CanvasLayer" parent="Level 1" instance=ExtResource("9_mdef3")]
 
 [node name="name" type="Label" parent="Level 1"]
 offset_left = 368.0
@@ -195,11 +195,6 @@ offset_right = 118.0
 offset_bottom = 248.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Interactiables" type="Node" parent="Level 1"]
-
-[node name="Door" parent="Level 1/Interactiables" instance=ExtResource("7_2qh6m")]
-position = Vector2(220, 244)
-
 [node name="Player" parent="Level 1" groups=["Rigidbody"] instance=ExtResource("3_a6ri6")]
 position = Vector2(548, 324)
 safe_margin = 0.9
@@ -207,12 +202,6 @@ safe_margin = 0.9
 [node name="Camera2D" type="Camera2D" parent="Level 1"]
 position = Vector2(405, 242)
 zoom = Vector2(1.8, 1.8)
-
-[node name="TileMapLayer" type="TileMapLayer" parent="Level 1"]
-visible = false
-scale = Vector2(0.25, 0.25)
-tile_map_data = PackedByteArray("AAAzAFsAAAAIAAUAAAA4AFsAAAAIAAUAAAA9AFsAAAAIAAUAAABCAFsAAAAIAAUAAABHAFsAAAAIAAUAAABMAFsAAAAIAAUAAABRAFsAAAAIAAUAAABWAFsAAAAIAAUAAABbAFsAAAAIAAUAAABgAFsAAAAIAAUAAABlAFsAAAAIAAUAAABqAFsAAAAIAAUAAABvAFsAAAAIAAUAAAB0AFsAAAAIAAUAAAB5AFsAAAAIAAUAAAB+AFsAAAAIAAUAAACDAFsAAAAIAAUAAACIAFsAAAAIAAUAAACNAFsAAAAIAAUAAACSAFsAAAAIAAUAAACXAFsAAAAIAAUAAAAuAFsAAAAHAAUAAAB/ADIAAAAHAAUAAACEADIAAAAIAAUAAACJADIAAAAIAAUAAACOADIAAAAIAAUAAACTADIAAAAIAAUAAACYADIAAAAIAAUAAAA=")
-tile_set = ExtResource("4_fkkk8")
 
 [node name="Kill" parent="Level 1" instance=ExtResource("8_klevp")]
 position = Vector2(317, 370)
@@ -222,6 +211,24 @@ scale = Vector2(12.5603, -0.834037)
 position = Vector2(358, 324)
 scale = Vector2(0.80034, -0.594037)
 
-[connection signal="body_entered" from="Level 1/Interactiables/Door" to="Level 1/Player" method="_on_door_body_entered"]
+[node name="Door" parent="Level 1" node_paths=PackedStringArray("game_manager") instance=ExtResource("7_2qh6m")]
+position = Vector2(220, 244)
+game_manager = NodePath("../..")
+
+[node name="CompleteScreen" parent="Level 1" node_paths=PackedStringArray("game_manager") instance=ExtResource("8_st7np")]
+offset_left = 173.0
+offset_top = 108.0
+offset_right = 173.0
+offset_bottom = 108.0
+game_manager = NodePath("../..")
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("8_2g1v6")]
+offset_left = 174.0
+offset_top = 108.0
+offset_right = 174.0
+offset_bottom = 108.0
+game_manager = NodePath("..")
+
 [connection signal="body_entered" from="Level 1/Kill" to="Level 1/Player" method="_on_kill_body_entered"]
 [connection signal="body_entered" from="Level 1/Kill2" to="Level 1/Player" method="_on_kill_body_entered"]
+[connection signal="body_entered" from="Level 1/Door" to="Level 1/Player" method="_on_door_body_entered"]

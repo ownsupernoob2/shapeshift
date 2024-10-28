@@ -90,8 +90,6 @@ func _physics_process(delta: float) -> void:
 				set_collision_mask_value(1, true) 
 
 func _process_input(delta: float):
-	if Input.is_action_just_pressed("reset"):
-		get_tree().reload_current_scene()
 	if Input.is_action_just_pressed("triangle") and can_switch:
 		if type != Types.TRIANGLE:
 			start_switch(Types.TRIANGLE)
@@ -251,7 +249,6 @@ func _process_collisions():
 
 func die():
 	dead = true
-	Global.speedrun_time = 0
 	face.play("dead")
 	$Explosion.emitting = true
 	$ExplosionSFX.play()

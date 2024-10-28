@@ -14,9 +14,13 @@ config/name="Transform"
 run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="res://assets/texture/default_bus_layout.tres"
+
 [autoload]
 
-AudioPlayer="*res://components/audio_player.tscn"
+AudioPlayer="*res://scenes/audio_player.tscn"
 Global="*res://global.gd"
 
 [display]

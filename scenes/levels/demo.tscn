@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=4 uid="uid://bxjomegpmfebh"]
 
-[ext_resource type="PackedScene" uid="uid://kjen34bt1yum" path="res://scene/MovingPlatform.tscn" id="1_0u7i5"]
+[ext_resource type="PackedScene" uid="uid://kjen34bt1yum" path="res://scenes/moving_platform.tscn" id="1_0u7i5"]
 [ext_resource type="Texture2D" uid="uid://uwdhg5eo2q83" path="res://assets/sprite/brick-1.png" id="1_5xtnu"]
-[ext_resource type="Script" path="res://script/demo.gd" id="1_8xli2"]
-[ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scene/player.tscn" id="2_12sbv"]
-[ext_resource type="PackedScene" uid="uid://bfuj0f6mb7nrv" path="res://scene/box.tscn" id="3_b0o31"]
-[ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scene/kill.tscn" id="4_5cxfv"]
-[ext_resource type="PackedScene" uid="uid://cr3bdgs7cr8jc" path="res://scene/key.tscn" id="5_u6ale"]
+[ext_resource type="Script" path="res://scripts/demo.gd" id="1_8xli2"]
+[ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scenes/player.tscn" id="2_12sbv"]
+[ext_resource type="PackedScene" uid="uid://bfuj0f6mb7nrv" path="res://scenes/box.tscn" id="3_b0o31"]
+[ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scenes/kill.tscn" id="4_5cxfv"]
+[ext_resource type="PackedScene" uid="uid://cr3bdgs7cr8jc" path="res://scenes/key.tscn" id="5_u6ale"]
 [ext_resource type="TileSet" uid="uid://qo2mgusrsbeq" path="res://assets/sprite/new_tile_set.tres" id="6_a4jvu"]
-[ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scene/door.tscn" id="7_t7ggv"]
+[ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scenes/door.tscn" id="7_t7ggv"]
 
 [sub_resource type="Gradient" id="Gradient_d77vw"]
 offsets = PackedFloat32Array(0, 0.5, 0.954545, 0.967532, 1)

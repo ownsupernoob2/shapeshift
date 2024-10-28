@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmivsxpmp1yq6"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_eeahr"]
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_kcjln"]
+[ext_resource type="Theme" uid="uid://e1cukr0ffdpe" path="res://assets/texture/menu.tres" id="2_gt10r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5dgk0"]
+font = ExtResource("1_kcjln")
+font_size = 120
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eeahr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+offset_left = 121.0
+offset_top = 64.0
+offset_right = 346.0
+offset_bottom = 216.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+offset_left = 71.0
+offset_top = 21.0
+offset_right = 603.0
+offset_bottom = 181.0
+scale = Vector2(0.16, 0.16)
+text = "= PAUSE ="
+label_settings = SubResource("LabelSettings_5dgk0")
+
+[node name="ExitButton" type="Button" parent="Panel"]
+layout_mode = 2
+offset_left = 89.0
+offset_top = 110.0
+offset_right = 219.0
+offset_bottom = 154.0
+scale = Vector2(0.362132, 0.399677)
+theme = ExtResource("2_gt10r")
+text = "EXIT"
+
+[node name="ResumeButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 70.0
+offset_right = 219.0
+offset_bottom = 114.0
+scale = Vector2(0.362132, 0.399677)
+theme = ExtResource("2_gt10r")
+text = "RESUME"
+
+[connection signal="pressed" from="Panel/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Panel/ResumeButton" to="." method="_on_resume_button_pressed"]
