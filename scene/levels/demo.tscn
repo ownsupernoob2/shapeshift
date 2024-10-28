@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://kjen34bt1yum" path="res://scene/MovingPlatform.tscn" id="1_0u7i5"]
 [ext_resource type="Texture2D" uid="uid://uwdhg5eo2q83" path="res://assets/sprite/brick-1.png" id="1_5xtnu"]
-[ext_resource type="Script" path="res://scene/levels/demo.gd" id="1_8xli2"]
+[ext_resource type="Script" path="res://script/demo.gd" id="1_8xli2"]
 [ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scene/player.tscn" id="2_12sbv"]
 [ext_resource type="PackedScene" uid="uid://bfuj0f6mb7nrv" path="res://scene/box.tscn" id="3_b0o31"]
 [ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scene/kill.tscn" id="4_5cxfv"]

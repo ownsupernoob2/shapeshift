@@ -6,33 +6,34 @@ extends CharacterBody2D
 @export var jump_speed = -160.0
 @export var gravity_speed = 170.0
 @export var MAX_FALL = 10.0
-@export var MAX_DASH = 2.0
-@export var DASH_MODIFIER = 1.5
-@export var DASH_SPEED = Vector2(300, 300)
+
 @onready var body: AnimatedSprite2D = $Body
 @onready var face: AnimatedSprite2D = $Face
+@onready var health_bar: Control = $HealthBar 
 signal key_picked_up
 
 @export var acceleration = 700
 @export var deceleration = 70
 @export var jump_force = 180
-
+@export var allow_square = true
+@export var allow_triangle = true
 var unit_direction: Vector2
 var gravity = Vector2.ZERO
 var dead = false
 var has_key = false
 var key_position = Vector2.ZERO
 var can_pickup_key = true
+var can_switch = true  # New variable to control switching
 
 var action
 var type = Types.CIRCLE
 var state = States.FALLING
 var prev_state = null
 var state_timeout = false
-var dash_timeout = false
-var dash_charge = 0
-var charging = false
+
+@onready var state_change_timer: Timer = $StateChangeTimer
 @onready var death_timer: Timer = $DeathTimer
+@onready var switch_timer: Timer = $SwitchTimer  # New timer for switch delay
 @onready var key_drop_timer: Timer = $"../KeyDropTimer"
 var key_node: Node2D = null
 const OFF_SCREEN_POSITION = Vector2(-1000, -1000)
@@ -49,7 +50,6 @@ enum States {
 	WALL_LEFT,
 	WALL_RIGHT,
 	CEILING,
-	DASHING,
 	FALLING
 }
 
@@ -58,13 +58,18 @@ enum Actions {
 	MOVE_RIGHT,
 	MOVE_UP,
 	MOVE_DOWN,
-	DASH,
 	FALL,
 	IDLE
 }
 
+func _ready():
+	switch_timer = Timer.new()
+	switch_timer.wait_time = 1.6
+	switch_timer.one_shot = true
+	switch_timer.connect("timeout", _on_switch_timer_timeout)
+	add_child(switch_timer)
+
 func _physics_process(delta: float) -> void:
-	
 	if dead != true:
 		if is_on_floor():
 			walk.emitting = true
@@ -74,7 +79,6 @@ func _physics_process(delta: float) -> void:
 		_process_gravity()
 		velocity += gravity * delta
 		move_and_slide()
-		#_process_collisions()
 		_update_state()
 		_process_animation(delta)
 	
@@ -84,32 +88,45 @@ func _physics_process(delta: float) -> void:
 				set_collision_mask_value(1, false) 
 			else:
 				set_collision_mask_value(1, true) 
-		#if c.get_collider() is RigidBody2D and type == Types.SQUARE:
-			#var box = c.get_collider()
-			#
-			#box.apply_central_force(-c.get_normal() * 5000)
-			#
-#
-			#if box.linear_velocity.length() > 5:
-				#box.linear_velocity = box.linear_velocity.normalized() * 5
 
 func _process_input(delta: float):
-	if Input.is_action_just_pressed("e"):
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
+	if Input.is_action_just_pressed("triangle") and can_switch:
 		if type != Types.TRIANGLE:
-			switch_type(Types.TRIANGLE)
+			start_switch(Types.TRIANGLE)
 			
-	if Input.is_action_just_pressed("r"):
+	if Input.is_action_just_pressed("square") and can_switch:
 		if type != Types.SQUARE:
-			switch_type(Types.SQUARE)
+			start_switch(Types.SQUARE)
 		
-	if Input.is_action_just_pressed("q"):
+	if Input.is_action_just_pressed("circle") and can_switch:
 		if type != Types.CIRCLE:
-			switch_type(Types.CIRCLE)
+			start_switch(Types.CIRCLE)
 			
 	if type == Types.CIRCLE:
 		_handle_circle_movement(delta)
 	else:
 		_handle_default_movement()
+
+func start_switch(new_type):
+	if can_switch and $Switch.finished:
+		can_switch = false
+		health_bar.start_progress()
+		var tween = create_tween()
+		tween.tween_method(set_switch_progress, 100.0, 0.0, 1.5)
+		switch_timer.start()
+		switch_type(new_type)
+		await switch_timer.timeout
+
+func set_switch_progress(value: float):
+	health_bar.set_value(value)
+	if value < 100:
+		health_bar.show()
+
+
+func _on_switch_timer_timeout():
+	can_switch = true
 
 func _handle_circle_movement(delta: float):
 	if not is_on_floor():
@@ -198,8 +215,6 @@ func _process_gravity():
 				gravity = Vector2(gravity_speed * 100, 0)
 			States.WALL_LEFT:
 				gravity = Vector2(-gravity_speed * 100, 0)
-			States.DASHING:
-				gravity = Vector2.ZERO 
 			States.CEILING:
 				gravity = Vector2(0, -gravity_speed * 100)  
 			_:
@@ -212,14 +227,13 @@ func _process_gravity():
 
 func _update_state():
 	if type == Types.CIRCLE or type == Types.SQUARE:
-		if not _ray_down() and state != States.DASHING and state != States.FALLING:
+		if not _ray_down() and state != States.FALLING:
 			_enter_state(States.FALLING)
 	else:
-		if not _ray_left() and not _ray_right() and not _ray_down() and not _ray_up() and not (state == States.DASHING or state == States.FALLING):
+		if not _ray_left() and not _ray_right() and not _ray_down() and not _ray_up() and not (state == States.FALLING):
 			_enter_state(States.FALLING)
 
-	if state == States.DASHING and dash_charge <= 0:
-		_enter_state(States.FALLING)
+
 
 	if _ray_down():
 		_enter_state(States.FLOOR)
@@ -237,6 +251,7 @@ func _process_collisions():
 
 func die():
 	dead = true
+	Global.speedrun_time = 0
 	face.play("dead")
 	$Explosion.emitting = true
 	$ExplosionSFX.play()
@@ -291,48 +306,39 @@ func _on_kill_body_entered(body: Node2D) -> void:
 		die()
 
 func _on_key_body_entered(body: Node2D) -> void:
-	print("Key body entered by: ", body.name)
 	if can_pickup_key and body == self and not has_key:
-		print("Picking up key")
 		has_key = true
 		key_position = global_position
 		
 		key_node = get_parent().get_node("Key")
 		if key_node:
-			print("Moving key off-screen")
-			key_node.global_position = OFF_SCREEN_POSITION
-		else:
-			print("Could not find Key node in the scene")
-		
+			key_node.global_position = OFF_SCREEN_POSITION		
 		emit_signal("key_picked_up")
-		print("Key picked up: ", has_key)
 		$KeySFX.play()
-	else:
-		print("Cannot pick up key. can_pickup_key: ", can_pickup_key, ", body is self: ", body == self, ", has_key: ", has_key)
+
 
 func switch_type(new_type):
-	if $Switch.finished:
-		if has_key:
-			drop_key()
-		
-		type = new_type
-		
-		match new_type:
-			Types.CIRCLE:
-				walk.color = Color(0.373,0.569,1)
-				body.play("circle")
-				face.play("circle")
-				speed = 100
-			Types.SQUARE:
-				walk.color = Color(1,0,0.11)
-				body.play("square")
-				face.play("square")
-				speed = 50
-			Types.TRIANGLE:
-				walk.color = Color(0.983,0.769,0)
-				body.play("triangle")
-				face.play("triangle")
-				speed = 100
+	if has_key:
+		drop_key()
+	
+	type = new_type
+	
+	match new_type:
+		Types.CIRCLE:
+			walk.color = Color(0.373,0.569,1)
+			body.play("circle")
+			face.play("circle")
+			speed = 100
+		Types.SQUARE:
+			walk.color = Color(1,0,0.11)
+			body.play("square")
+			face.play("square")
+			speed = 50
+		Types.TRIANGLE:
+			walk.color = Color(0.983,0.769,0)
+			body.play("triangle")
+			face.play("triangle")
+			speed = 100
 	$Switch.play()
 
 
@@ -348,12 +354,16 @@ func drop_key():
 func _on_key_drop_timer_timeout():
 	can_pickup_key = true
 
-
 func _on_death_timer_timeout() -> void:
 	get_tree().reload_current_scene()
 
 
 func _on_door_body_entered(body: Node2D) -> void:
-	if has_key and body == self:
+	key_node = get_parent().get_node("Key")
+	if key_node:
+		if has_key and body == self:
+			Global.speedrun_time = 0
+			$CompleteSFX.play()
+	else:
+		Global.speedrun_time = 0
 		$CompleteSFX.play()
-		pass

@@ -1,8 +1,6 @@
 extends Control
 
 @export var is_full_screen: bool = false
-var music_bus = AudioServer.get_bus_index("Music")
-var sfx_bus = AudioServer.get_bus_index("SFX")
 @onready var click: AudioStreamPlayer = $AudioStreamPlayer
 
 
@@ -11,27 +9,24 @@ func _on_back_pressed() -> void:
 		get_tree().change_scene_to_file("res://menu.tscn")
 
 
-func _on_fullscreen_toggled(toggled_on: bool) -> void:
+
+func _on_level_1_pressed() -> void:
 	click.play()
-	if toggled_on == true:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	get_tree().change_scene_to_file("res://scene/levels/level_1.tscn")
 
 
-func _on_music_value_changed(value: float) -> void:
-	click.play()
-	
-	AudioServer.set_bus_volume_db(music_bus, value)
-	if value == -30:
-		AudioServer.set_bus_mute(music_bus,true)
-	else:
-		AudioServer.set_bus_mute(music_bus,false)
 
-func _on_effect_value_changed(value: float) -> void:
+
+func _on_level_2_pressed() -> void:
 	click.play()
-	AudioServer.set_bus_volume_db(sfx_bus, value)
-	if value == -30:
-		AudioServer.set_bus_mute(sfx_bus,true)
-	else:
-		AudioServer.set_bus_mute(sfx_bus,false)
+	get_tree().change_scene_to_file("res://scene/levels/demo.tscn")
+
+
+
+func _on_level_3_pressed() -> void:
+	click.play()
+
+
+
+func _on_level_4_pressed() -> void:
+	click.play()

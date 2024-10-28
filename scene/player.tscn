@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dm8pfg3wjkktn"]
+[gd_scene load_steps=19 format=3 uid="uid://dm8pfg3wjkktn"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_cda01"]
 [ext_resource type="Texture2D" uid="uid://bwv7nmp827wf8" path="res://assets/sprite/PNG/Default/blue_body_circle.png" id="2_f3mvf"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dvq32k341beov" path="res://assets/sfx/complete.wav" id="9_6l3uk"]
 [ext_resource type="AudioStream" uid="uid://c3y8bvkkrwrf" path="res://assets/sfx/coin.wav" id="10_k0agf"]
 [ext_resource type="AudioStream" uid="uid://bu4bex5h2ajts" path="res://assets/sfx/switch.wav" id="12_wy5tr"]
+[ext_resource type="PackedScene" uid="uid://ccrgnrtuwo3lf" path="res://scene/health_bar.tscn" id="13_kwfim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq858"]
 size = Vector2(4.99107, 5.1464)
@@ -127,9 +128,8 @@ target_position = Vector2(7.48661, -2.2056)
 [node name="RayRight2" type="RayCast2D" parent="Raycasts"]
 target_position = Vector2(7.48661, 2.2056)
 
-[node name="StateChangeTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.1
+[node name="SwitchTimer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="DashTimeout" type="Timer" parent="."]
 
@@ -193,6 +193,13 @@ color = Color(0.373, 0.569, 1, 1)
 stream = ExtResource("12_wy5tr")
 volume_db = -4.685
 
-[connection signal="timeout" from="StateChangeTimer" to="." method="_onStateChangeTimer_timeout"]
+[node name="HealthBar" parent="." instance=ExtResource("13_kwfim")]
+offset_left = -0.356505
+offset_top = -6.2492
+offset_right = -0.356505
+offset_bottom = -6.2492
+scale = Vector2(0.0360132, 0.0376722)
+
+[connection signal="timeout" from="SwitchTimer" to="." method="_onStateChangeTimer_timeout"]
 [connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

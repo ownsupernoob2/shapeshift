@@ -6,7 +6,7 @@ func _ready():
 
 func _on_play_pressed() -> void:
 	click.play()
-	get_tree().change_scene_to_file("res://scene/levels/demo.tscn")
+	get_tree().change_scene_to_file("res://scene/level_select.tscn")
 
 
 func _on_options_pressed() -> void:
