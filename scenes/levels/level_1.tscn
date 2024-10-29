@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwid3bke3mkb"]
+[gd_scene load_steps=14 format=3 uid="uid://cwid3bke3mkb"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_0urae"]
 [ext_resource type="Texture2D" uid="uid://uwdhg5eo2q83" path="res://assets/sprite/brick-1.png" id="2_lym6p"]
-[ext_resource type="Script" path="res://scenes/levels/name.gd" id="3_2gx3x"]
 [ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scenes/player.tscn" id="3_a6ri6"]
+[ext_resource type="PackedScene" uid="uid://bi2kwimix0xfq" path="res://scenes/level_name.tscn" id="3_w385j"]
 [ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scenes/door.tscn" id="7_2qh6m"]
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="7_u40l7"]
 [ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="8_2g1v6"]
@@ -22,10 +22,6 @@ fill_to = Vector2(0, 0)
 [sub_resource type="LabelSettings" id="LabelSettings_ih4p6"]
 font = ExtResource("7_u40l7")
 font_size = 40
-
-[sub_resource type="LabelSettings" id="LabelSettings_1b3eo"]
-font = ExtResource("7_u40l7")
-font_size = 70
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58imm"]
 size = Vector2(517.818, 20)
@@ -58,15 +54,7 @@ R TO RESET
 GOAL: ESCAPE"
 label_settings = SubResource("LabelSettings_ih4p6")
 
-[node name="name" type="Label" parent="Level 1"]
-offset_left = 368.0
-offset_top = 160.0
-offset_right = 597.0
-offset_bottom = 253.0
-scale = Vector2(0.344592, 0.342052)
-text = "LEVEL 1"
-label_settings = SubResource("LabelSettings_1b3eo")
-script = ExtResource("3_2gx3x")
+[node name="name" parent="Level 1" instance=ExtResource("3_w385j")]
 
 [node name="Brick-1" type="Sprite2D" parent="Level 1"]
 visible = false

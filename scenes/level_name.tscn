@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi2kwimix0xfq"]
+
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_i8x7p"]
+[ext_resource type="Script" path="res://scenes/levels/name.gd" id="2_fhfmj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1b3eo"]
+font = ExtResource("1_i8x7p")
+font_size = 70
+
+[node name="name" type="Label"]
+offset_left = 368.0
+offset_top = 160.0
+offset_right = 597.0
+offset_bottom = 253.0
+scale = Vector2(0.344592, 0.342052)
+text = "LEVEL 1"
+label_settings = SubResource("LabelSettings_1b3eo")
+script = ExtResource("2_fhfmj")

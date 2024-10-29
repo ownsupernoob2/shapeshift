@@ -84,7 +84,8 @@ func _physics_process(delta: float) -> void:
 	
 		for i in get_slide_collision_count():
 			var c = get_slide_collision(i)
-			if type == Types.SQUARE:
+			print(c)
+			if type == Types.SQUARE and not _ray_down():
 				set_collision_mask_value(1, false) 
 			else:
 				set_collision_mask_value(1, true) 

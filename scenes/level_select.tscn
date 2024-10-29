@@ -127,6 +127,7 @@ offset_bottom = 320.0
 text = "2"
 
 [node name="Label" type="Label" parent="Level2"]
+layout_mode = 0
 offset_left = -8.0
 offset_top = -24.0
 offset_right = 32.0
@@ -141,6 +142,7 @@ offset_bottom = 320.0
 text = "3"
 
 [node name="Label" type="Label" parent="Level3"]
+layout_mode = 0
 offset_left = -8.0
 offset_top = -24.0
 offset_right = 32.0
@@ -155,6 +157,7 @@ offset_bottom = 320.0
 text = "4"
 
 [node name="Label" type="Label" parent="Level4"]
+layout_mode = 0
 offset_left = -8.0
 offset_top = -24.0
 offset_right = 32.0
