@@ -33,8 +33,8 @@ var state_timeout = false
 
 @onready var state_change_timer: Timer = $StateChangeTimer
 @onready var death_timer: Timer = $DeathTimer
-@onready var switch_timer: Timer = $SwitchTimer  # New timer for switch delay
-@onready var key_drop_timer: Timer = $"../KeyDropTimer"
+@onready var switch_timer: Timer = $SwitchTimer  
+@onready var key_drop_timer: Timer = $"KeyDropTimer"
 var key_node: Node2D = null
 const OFF_SCREEN_POSITION = Vector2(-1000, -1000)
 @onready var walk: CPUParticles2D = $walk
@@ -341,7 +341,7 @@ func switch_type(new_type):
 
 
 func drop_key():
-	if has_key and key_node:
+	if has_key:
 		has_key = false
 		can_pickup_key = false
 		
@@ -360,8 +360,6 @@ func _on_door_body_entered(body: Node2D) -> void:
 	key_node = get_parent().get_node("Key")
 	if key_node:
 		if has_key and body == self:
-			Global.speedrun_time = 0
 			$CompleteSFX.play()
 	else:
-		Global.speedrun_time = 0
 		$CompleteSFX.play()

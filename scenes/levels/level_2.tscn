@@ -1,0 +1,174 @@
+[gd_scene load_steps=18 format=3 uid="uid://chy1g8rx330f6"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_cppfu"]
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="2_q3d3j"]
+[ext_resource type="PackedScene" uid="uid://bi2kwimix0xfq" path="res://scenes/level_name.tscn" id="3_borry"]
+[ext_resource type="Texture2D" uid="uid://uwdhg5eo2q83" path="res://assets/sprite/brick-1.png" id="4_ahgce"]
+[ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scenes/player.tscn" id="5_3tcw0"]
+[ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scenes/kill.tscn" id="6_tqxv5"]
+[ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scenes/door.tscn" id="7_ga4e6"]
+[ext_resource type="PackedScene" uid="uid://cdwfvn5f8b1uw" path="res://scenes/complete_screen.tscn" id="8_4no7r"]
+[ext_resource type="PackedScene" uid="uid://kjen34bt1yum" path="res://scenes/moving_platform.tscn" id="8_kjtxg"]
+[ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="9_15xbj"]
+[ext_resource type="PackedScene" uid="uid://cr3bdgs7cr8jc" path="res://scenes/key.tscn" id="10_kmsh8"]
+
+[sub_resource type="Gradient" id="Gradient_d77vw"]
+offsets = PackedFloat32Array(0, 0.5, 0.954545, 0.967532, 1)
+colors = PackedColorArray(0.246153, 0.256821, 0.233204, 1, 0.231438, 0.235523, 0.229429, 1, 0.354747, 0.375782, 0.367043, 1, 0.337131, 0.355745, 0.347384, 1, 0.369043, 0.392044, 0.382999, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t5b5e"]
+gradient = SubResource("Gradient_d77vw")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ih4p6"]
+font = ExtResource("2_q3d3j")
+font_size = 40
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyjym"]
+resource_local_to_scene = true
+size = Vector2(74.4387, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lq4dr"]
+size = Vector2(79, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nileg"]
+size = Vector2(20.5, 256)
+
+[node name="GameManager" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_cppfu")
+current_level = 1
+
+[node name="Level 2" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Level 2"]
+offset_left = 10.0
+offset_top = -9.0
+offset_right = 828.0
+offset_bottom = 477.0
+size_flags_vertical = 8
+texture = SubResource("GradientTexture2D_t5b5e")
+
+[node name="tutorial" type="Label" parent="Level 2"]
+offset_left = 206.0
+offset_top = 148.0
+offset_right = 629.0
+offset_bottom = 373.0
+scale = Vector2(0.319998, 0.320002)
+text = "PRESS 2 OR 1 TO SWITCH
+BETWEEN RHOMBUS OR
+CIRCLE"
+label_settings = SubResource("LabelSettings_ih4p6")
+
+[node name="tutorial2" type="Label" parent="Level 2"]
+offset_left = 206.0
+offset_top = 218.0
+offset_right = 629.0
+offset_bottom = 443.0
+scale = Vector2(0.319998, 0.320002)
+text = "USE THE KEY TO EXIT
+BUT YOU WILL DROP IT
+WHEN YOU SWITCH"
+label_settings = SubResource("LabelSettings_ih4p6")
+
+[node name="Brick-1" type="Sprite2D" parent="Level 2"]
+visible = false
+position = Vector2(402.5, 242)
+scale = Vector2(0.211364, 0.161176)
+texture = ExtResource("4_ahgce")
+
+[node name="Player" parent="Level 2" groups=["Rigidbody"] instance=ExtResource("5_3tcw0")]
+position = Vector2(237, 321)
+scale = Vector2(2.90602, 2.69321)
+safe_margin = 0.9
+
+[node name="Camera2D" type="Camera2D" parent="Level 2"]
+position = Vector2(405, 242)
+zoom = Vector2(1.8, 1.8)
+
+[node name="Door" parent="Level 2" node_paths=PackedStringArray("game_manager") instance=ExtResource("7_ga4e6")]
+position = Vector2(573, 163)
+game_manager = NodePath("../..")
+
+[node name="name" parent="Level 2" instance=ExtResource("3_borry")]
+offset_right = 612.0
+text = "LEVEL 2"
+
+[node name="CompleteScreen" parent="Level 2" node_paths=PackedStringArray("game_manager") instance=ExtResource("8_4no7r")]
+visible = false
+offset_left = 173.0
+offset_top = 108.0
+offset_right = 173.0
+offset_bottom = 108.0
+game_manager = NodePath("../..")
+
+[node name="MovingPlatform" parent="Level 2" instance=ExtResource("8_kjtxg")]
+position = Vector2(233, 358)
+
+[node name="CollisionShape2D" parent="Level 2/MovingPlatform/Platform" index="0"]
+shape = SubResource("RectangleShape2D_pyjym")
+
+[node name="MoveLocation" parent="Level 2/MovingPlatform" index="1"]
+position = Vector2(230, -10)
+
+[node name="Kill" parent="Level 2" instance=ExtResource("6_tqxv5")]
+position = Vector2(405, 373)
+scale = Vector2(24.5763, -0.992824)
+
+[node name="Key" parent="Level 2" instance=ExtResource("10_kmsh8")]
+position = Vector2(404, 294)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level 2"]
+position = Vector2(557, 325)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 2/StaticBody2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_lq4dr")
+
+[node name="ColorRect" type="ColorRect" parent="Level 2/StaticBody2D"]
+offset_left = -40.0
+offset_top = -11.0
+offset_right = 39.0
+offset_bottom = 11.0
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Level 2"]
+position = Vector2(572, 194)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 2/StaticBody2D3"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_lq4dr")
+
+[node name="ColorRect" type="ColorRect" parent="Level 2/StaticBody2D3"]
+offset_left = -40.0
+offset_top = -11.0
+offset_right = 39.0
+offset_bottom = 11.0
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Level 2"]
+position = Vector2(557, 325)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 2/StaticBody2D2"]
+position = Vector2(65, -91)
+shape = SubResource("RectangleShape2D_nileg")
+
+[node name="ColorRect" type="ColorRect" parent="Level 2/StaticBody2D2"]
+offset_left = 54.0
+offset_top = -219.0
+offset_right = 75.0
+offset_bottom = 38.0
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("9_15xbj")]
+visible = false
+offset_left = 174.0
+offset_top = 108.0
+offset_right = 174.0
+offset_bottom = 108.0
+game_manager = NodePath("..")
+
+[connection signal="body_entered" from="Level 2/Door" to="Level 2/Player" method="_on_door_body_entered"]
+[connection signal="body_entered" from="Level 2/Kill" to="Level 2/Player" method="_on_kill_body_entered"]
+[connection signal="body_entered" from="Level 2/Key" to="Level 2/Player" method="_on_key_body_entered"]
+
+[editable path="Level 2/MovingPlatform"]
