@@ -117,13 +117,14 @@ target_position = Vector2(2.13903, 7.71959)
 target_position = Vector2(-2.13903, 7.71959)
 
 [node name="RayLeft" type="RayCast2D" parent="Raycasts"]
-target_position = Vector2(-7.4866, -2.2056)
+scale = Vector2(1.198, 1.198)
+target_position = Vector2(-7.43959, -2.45476)
 
 [node name="RayLeft2" type="RayCast2D" parent="Raycasts"]
 target_position = Vector2(-7.4866, 2.2056)
 
 [node name="RayRight" type="RayCast2D" parent="Raycasts"]
-scale = Vector2(1.19758, 1.09838)
+scale = Vector2(1.198, 1.198)
 target_position = Vector2(7.48661, -2.5732)
 
 [node name="RayRight2" type="RayCast2D" parent="Raycasts"]

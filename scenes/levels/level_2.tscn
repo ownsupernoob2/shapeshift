@@ -124,13 +124,13 @@ position = Vector2(404, 294)
 position = Vector2(557, 325)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level 2/StaticBody2D"]
-position = Vector2(-0.5, 0)
+position = Vector2(16, 0)
 shape = SubResource("RectangleShape2D_lq4dr")
 
 [node name="ColorRect" type="ColorRect" parent="Level 2/StaticBody2D"]
-offset_left = -40.0
+offset_left = -25.0
 offset_top = -11.0
-offset_right = 39.0
+offset_right = 54.0
 offset_bottom = 11.0
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Level 2"]

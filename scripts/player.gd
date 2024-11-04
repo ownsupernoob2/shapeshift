@@ -341,7 +341,7 @@ func switch_type(new_type):
 
 
 func drop_key():
-	if has_key:
+	if has_key and key_node:
 		has_key = false
 		can_pickup_key = false
 		
