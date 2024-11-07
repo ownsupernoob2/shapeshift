@@ -21,36 +21,38 @@ func _on_level_1_pressed() -> void:
 
 func _on_level_2_pressed() -> void:
 	click.play()
-	get_tree().change_scene_to_file("res://scenes/levels/demo.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/level_2.tscn")
 
 
 
 func _on_level_3_pressed() -> void:
 	click.play()
-
+	get_tree().change_scene_to_file("res://scenes/levels/level_3.tscn")
 
 
 func _on_level_4_pressed() -> void:
 	click.play()
+	get_tree().change_scene_to_file("res://scenes/levels/level_4.tscn")
+
 
 
 
 
 func _on_level_1_mouse_entered() -> void:
-	$Level1/Label.text = "Best: " + str(Global.time_1) + " sec"
+	$Level1/Label.text = "Best: " + str(Global.level_times[1]) + " sec"
 
 
 func _on_level_2_mouse_entered() -> void:
-	$Level2/Label.text = "Best: " + str(Global.time_2) + " sec"
+	$Level2/Label.text = "Best: " + str(Global.level_times[2]) + " sec"
 
 
 func _on_level_3_mouse_entered() -> void:
-	$Level3/Label.text = "Best: " + str(Global.time_3) + " sec"
+	$Level3/Label.text = "Best: " + str(Global.level_times[3]) + " sec"
 
 
 
 func _on_level_4_mouse_entered() -> void:
-	$Level4/Label.text = "Best: " + str(Global.time_4) + " sec"
+	$Level4/Label.text = "Best: " + str(Global.level_times[4]) + " sec"
 
 
 

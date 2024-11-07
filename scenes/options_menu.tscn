@@ -114,7 +114,7 @@ offset_left = 612.0
 offset_top = 254.0
 offset_right = 750.0
 offset_bottom = 295.0
-text = "RHOMBUS - 2"
+text = "RHOMBUS "
 label_settings = SubResource("LabelSettings_04npw")
 
 [node name="Label2" type="Label" parent="Triangle"]
@@ -133,7 +133,8 @@ offset_left = 49.0
 offset_top = 254.0
 offset_right = 156.0
 offset_bottom = 295.0
-text = "SQUARE - 3"
+text = "SQUARE
+"
 label_settings = SubResource("LabelSettings_qxghl")
 
 [node name="Label" type="Label" parent="Square"]
@@ -161,7 +162,7 @@ offset_left = 612.0
 offset_top = 63.0
 offset_right = 701.0
 offset_bottom = 104.0
-text = "CIRCLE - 1"
+text = "CIRCLE"
 label_settings = SubResource("LabelSettings_ub343")
 
 [node name="BlueBodyCircle" type="Sprite2D" parent="."]

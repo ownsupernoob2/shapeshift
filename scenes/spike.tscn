@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgdptq1shqro5"]
+
+[ext_resource type="Texture2D" uid="uid://g7ngtrq18jpk" path="res://assets/sprite/PNG/Double/red_body_rhombus.png" id="1_81m4m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa072"]
+
+[node name="Kill" type="Area2D"]
+collision_layer = 7
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_oa072")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.0787445, 0.204551)
+rotation = 3.14159
+scale = Vector2(0.171138, 0.177271)
+texture = ExtResource("1_81m4m")

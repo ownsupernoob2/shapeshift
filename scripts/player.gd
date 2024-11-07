@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 130.0
-@export var push_force = 100.0
+@export var push_force = 2000.0
 @export var MAX_SPEED = 30.0
 @export var jump_speed = -160.0
 @export var gravity_speed = 170.0
@@ -17,13 +17,13 @@ signal key_picked_up
 @export var jump_force = 180
 @export var allow_square = true
 @export var allow_triangle = true
+@export var has_key = false
 var unit_direction: Vector2
 var gravity = Vector2.ZERO
 var dead = false
-var has_key = false
 var key_position = Vector2.ZERO
 var can_pickup_key = true
-var can_switch = true  # New variable to control switching
+var can_switch = true  
 
 var action
 var type = Types.CIRCLE
@@ -31,6 +31,7 @@ var state = States.FALLING
 var prev_state = null
 var state_timeout = false
 
+@onready var wall_delay: Timer = $WallDelay
 @onready var state_change_timer: Timer = $StateChangeTimer
 @onready var death_timer: Timer = $DeathTimer
 @onready var switch_timer: Timer = $SwitchTimer  
@@ -64,7 +65,7 @@ enum Actions {
 
 func _ready():
 	switch_timer = Timer.new()
-	switch_timer.wait_time = 1.6
+	switch_timer.wait_time = 1
 	switch_timer.one_shot = true
 	switch_timer.connect("timeout", _on_switch_timer_timeout)
 	add_child(switch_timer)
@@ -84,18 +85,16 @@ func _physics_process(delta: float) -> void:
 	
 		for i in get_slide_collision_count():
 			var c = get_slide_collision(i)
-			print(c)
-			if type == Types.SQUARE and not _ray_down():
-				set_collision_mask_value(1, false) 
-			else:
-				set_collision_mask_value(1, true) 
+			if type == Types.SQUARE:
+				if c.get_collider() is RigidBody2D:
+					c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 
 func _process_input(delta: float):
-	if Input.is_action_just_pressed("triangle") and can_switch:
+	if Input.is_action_just_pressed("triangle") and can_switch and allow_triangle:
 		if type != Types.TRIANGLE:
 			start_switch(Types.TRIANGLE)
 			
-	if Input.is_action_just_pressed("square") and can_switch:
+	if Input.is_action_just_pressed("square") and can_switch and allow_square:
 		if type != Types.SQUARE:
 			start_switch(Types.SQUARE)
 		
@@ -106,14 +105,14 @@ func _process_input(delta: float):
 	if type == Types.CIRCLE:
 		_handle_circle_movement(delta)
 	else:
-		_handle_default_movement()
+		_handle_default_movement(delta)
 
 func start_switch(new_type):
 	if can_switch and $Switch.finished:
 		can_switch = false
 		health_bar.start_progress()
 		var tween = create_tween()
-		tween.tween_method(set_switch_progress, 100.0, 0.0, 1.5)
+		tween.tween_method(set_switch_progress, 100.0, 0.0, 1)
 		switch_timer.start()
 		switch_type(new_type)
 		await switch_timer.timeout
@@ -142,7 +141,7 @@ func _handle_circle_movement(delta: float):
 	
 	velocity.x = clamp(velocity.x, -speed, speed)
 
-func _handle_default_movement():
+func _handle_default_movement(delta: float):
 	if state == States.FLOOR or state == States.CEILING or state == States.FALLING:
 		if state != States.FALLING:
 			velocity.x = 0
@@ -179,7 +178,23 @@ func _handle_default_movement():
 			velocity.y += speed
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= speed
+	
+	if _ray_top_right() and not _ray_up() and not _ray_right() and (Input.is_action_pressed("move_left") or Input.is_action_just_pressed("move_up")):
+		global_position.x += -1
+		global_position.y += -3
+	if _ray_top_left() and not _ray_up() and not _ray_left() and (Input.is_action_pressed("move_right") or Input.is_action_just_pressed("move_up")):
+		print('hi')
+		global_position.y += -3
+		global_position.x += 1
+	if _ray_top_right() and not _ray_up() and not _ray_right() and Input.is_action_pressed("move_down"):
+		global_position.x += 1
+		global_position.y += 5
+	if _ray_bottom_right() and not _ray_down() and not _ray_right() and  Input.is_action_pressed("move_left"):
+		global_position.x += 1
+		global_position.y += 2
 
+
+	
 	if _ray_down():
 		if Input.is_action_pressed("move_right") and not _ray_right():
 			_enter_state(States.FLOOR)
@@ -193,10 +208,11 @@ func _handle_default_movement():
 			_enter_state(States.CEILING)
 
 	else:
-		if not _ray_right() and Input.is_action_pressed("move_right"):
-			_enter_state(States.FALLING)
-		elif not _ray_left() and Input.is_action_pressed("move_left"):
-			_enter_state(States.FALLING)
+		pass
+		#if not _ray_right() and Input.is_action_pressed("move_right"):
+			#_enter_state(States.FALLING)
+		#elif not _ray_left() and Input.is_action_pressed("move_left"):
+			#_enter_state(States.FALLING)
 
 func move_toward(current, target, max_delta):
 	if abs(target - current) <= max_delta:
@@ -205,7 +221,7 @@ func move_toward(current, target, max_delta):
 
 func _process_gravity():
 	if type == Types.SQUARE:
-		gravity = Vector2(0, gravity_speed * 1.2)  
+		gravity = Vector2(0, gravity_speed * 1.5)  
 	elif type == Types.TRIANGLE:
 		match state:
 			(States.WALL_RIGHT or States.WALL_LEFT) and States.FLOOR:
@@ -220,7 +236,7 @@ func _process_gravity():
 				if _ray_down():
 					gravity = Vector2(0, gravity_speed * 100)
 				else:
-					gravity = Vector2(0, gravity_speed)
+					gravity = Vector2(0, gravity_speed * 1.2)
 	else:
 		gravity = Vector2(0, gravity_speed)
 
@@ -255,7 +271,6 @@ func die():
 	$ExplosionSFX.play()
 	
 	death_timer.start()
-	print("u died")
 
 func _enter_state(new_state):
 	if new_state != prev_state or state_timeout:
@@ -266,17 +281,33 @@ func _enter_state(new_state):
 func _on_StateChangeTimer_timeout():
 	state_timeout = false
 
+
+func _ray_top_right():
+	return $Raycasts/RayTopRight.is_colliding()
+	
+	
+func _ray_top_left():
+	return $Raycasts/RayTopLeft.is_colliding()
+	
+	
+func _ray_bottom_right():
+	return $Raycasts/RayBottomRight.is_colliding()
+	
+func _ray_bottom_left():
+	return $Raycasts/RayBottomLeft.is_colliding()
+
+
 func _ray_up():
-	return $Raycasts/RayUp.is_colliding() or $Raycasts/RayUp2.is_colliding()
+	return $Raycasts/RayUp.is_colliding()
 
 func _ray_down():
-	return $Raycasts/RayDown.is_colliding() or $Raycasts/RayDown2.is_colliding()
+	return $Raycasts/RayDown.is_colliding()
 
 func _ray_left():
-	return $Raycasts/RayLeft.is_colliding() or $Raycasts/RayLeft2.is_colliding()
+	return $Raycasts/RayLeft.is_colliding() 
 
 func _ray_right():
-	return $Raycasts/RayRight.is_colliding() or $Raycasts/RayRight2.is_colliding()
+	return $Raycasts/RayRight.is_colliding()
 
 func _process_animation(delta: float):
 	if type == Types.CIRCLE:
@@ -299,7 +330,6 @@ func _process_animation(delta: float):
 				face.rotation_degrees = 0
 
 func _on_kill_body_entered(body: Node2D) -> void:
-	print("bruh?")
 	if (body == self):
 		die()
 
@@ -310,7 +340,7 @@ func _on_key_body_entered(body: Node2D) -> void:
 		
 		key_node = get_parent().get_node("Key")
 		if key_node:
-			key_node.global_position = OFF_SCREEN_POSITION		
+			key_node.global_position = OFF_SCREEN_POSITION
 		emit_signal("key_picked_up")
 		$KeySFX.play()
 
@@ -356,10 +386,8 @@ func _on_death_timer_timeout() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_door_body_entered(body: Node2D) -> void:
-	key_node = get_parent().get_node("Key")
-	if key_node:
-		if has_key and body == self:
-			$CompleteSFX.play()
-	else:
-		$CompleteSFX.play()
+
+
+func _on_wall_delay_timeout() -> void:
+	if _ray_top_right():
+		global_position.x + 100

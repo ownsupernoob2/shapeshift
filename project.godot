@@ -10,9 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Transform"
+config/name="Shapeshift"
+config/description="A puzzle/speed run game where you can try to escape a facility using the power of shape shifting (literally)."
+config/version="1.0.0"
 run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://assets/Screenshot from 2024-11-07 23-54-36.png"
 
 [audio]
 

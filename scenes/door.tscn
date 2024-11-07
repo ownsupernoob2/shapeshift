@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://gyclghbovt4d"]
+[gd_scene load_steps=7 format=3 uid="uid://gyclghbovt4d"]
 
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_2y2te"]
 [ext_resource type="Script" path="res://scripts/speedrun.gd" id="2_3toox"]
@@ -10,6 +10,14 @@ size = Vector2(20, 38)
 font = ExtResource("1_2y2te")
 font_size = 200
 
+[sub_resource type="Gradient" id="Gradient_52xha"]
+colors = PackedColorArray(1.37173e-06, 0.262366, 0.356734, 1, 0, 0.692918, 0.824194, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mfcmn"]
+gradient = SubResource("Gradient_52xha")
+fill_from = Vector2(0.481651, 1)
+fill_to = Vector2(0.5, 0)
+
 [node name="Door" type="Area2D"]
 collision_layer = 7
 collision_mask = 3
@@ -17,13 +25,6 @@ script = ExtResource("2_3toox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mypeg")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -10.0
-offset_top = -19.0
-offset_right = 10.0
-offset_bottom = 19.0
-color = Color(1, 0.054902, 1, 1)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -17.0
@@ -41,5 +42,13 @@ offset_top = -62.0
 offset_right = 22.0
 offset_bottom = -39.0
 text = "1.00"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -10.0
+offset_top = -19.0
+offset_right = 61.0
+offset_bottom = 46.0
+scale = Vector2(0.279999, 0.583383)
+texture = SubResource("GradientTexture2D_mfcmn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

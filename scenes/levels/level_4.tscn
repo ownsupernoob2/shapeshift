@@ -1,0 +1,306 @@
+[gd_scene load_steps=25 format=3 uid="uid://bo01mu1wq7nyw"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_biyro"]
+[ext_resource type="Texture2D" uid="uid://bgb13oebx4k35" path="res://assets/texture/0aee6ff8b80a9594b0290f50ac15918e.jpg" id="2_rsy33"]
+[ext_resource type="PackedScene" uid="uid://kjen34bt1yum" path="res://scenes/moving_platform.tscn" id="3_y41y7"]
+[ext_resource type="PackedScene" uid="uid://cgdptq1shqro5" path="res://scenes/spike.tscn" id="3_y74j2"]
+[ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scenes/player.tscn" id="4_s32si"]
+[ext_resource type="PackedScene" uid="uid://bfuj0f6mb7nrv" path="res://scenes/box.tscn" id="5_gubyk"]
+[ext_resource type="PackedScene" uid="uid://bi2kwimix0xfq" path="res://scenes/level_name.tscn" id="6_ggx45"]
+[ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scenes/kill.tscn" id="7_pk6ae"]
+[ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scenes/door.tscn" id="8_jrmuk"]
+[ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="9_h4wax"]
+[ext_resource type="PackedScene" uid="uid://cdwfvn5f8b1uw" path="res://scenes/complete_screen.tscn" id="10_5hn6c"]
+
+[sub_resource type="Gradient" id="Gradient_d77vw"]
+offsets = PackedFloat32Array(0, 0.5, 0.954545, 0.967532, 1)
+colors = PackedColorArray(0.246153, 0.256821, 0.233204, 1, 0.231438, 0.235523, 0.229429, 1, 0.354747, 0.375782, 0.367043, 1, 0.337131, 0.355745, 0.347384, 1, 0.369043, 0.392044, 0.382999, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gxlrp"]
+gradient = SubResource("Gradient_d77vw")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjh0u"]
+resource_local_to_scene = true
+size = Vector2(52.1071, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wayxd"]
+size = Vector2(106.337, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikhm0"]
+size = Vector2(65, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xeoo"]
+size = Vector2(178.652, 16.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehwj7"]
+size = Vector2(11, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubx3w"]
+size = Vector2(494.932, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ode1c"]
+size = Vector2(493.003, 21.9553)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iepa0"]
+font_color = Color(0.165656, 0.165656, 0.165656, 1)
+
+[sub_resource type="Curve" id="Curve_oenis"]
+_data = [Vector2(0.0955056, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.285714), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_sl8mh"]
+colors = PackedColorArray(1, 1, 1, 1, 0.266575, 0.266575, 0.266575, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bci1"]
+size = Vector2(331, 11.5)
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_biyro")
+current_level = 4
+
+[node name="Level 4" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Level 4"]
+offset_left = 10.0
+offset_top = -6.0
+offset_right = 828.0
+offset_bottom = 480.0
+size_flags_vertical = 8
+texture = SubResource("GradientTexture2D_gxlrp")
+
+[node name="ColorRect" type="ColorRect" parent="Level 4"]
+offset_left = 195.0
+offset_top = 107.0
+offset_right = 282.0
+offset_bottom = 187.0
+color = Color(0.144063, 0.144063, 0.144063, 1)
+
+[node name="background" type="Sprite2D" parent="Level 4"]
+modulate = Color(1, 1, 1, 0.317647)
+position = Vector2(408.5, 246.25)
+scale = Vector2(0.620924, 0.572449)
+texture = ExtResource("2_rsy33")
+
+[node name="Kill2" parent="Level 4" instance=ExtResource("3_y74j2")]
+position = Vector2(289, 214)
+rotation = 1.56581
+scale = Vector2(0.541512, 1.00157)
+
+[node name="Kill3" parent="Level 4" instance=ExtResource("3_y74j2")]
+position = Vector2(289, 231)
+rotation = 1.56581
+scale = Vector2(0.541512, 1.00157)
+
+[node name="MovingPlatform" parent="Level 4" instance=ExtResource("3_y41y7")]
+position = Vector2(232, 270)
+
+[node name="Platform" parent="Level 4/MovingPlatform" index="0"]
+position = Vector2(7, 1)
+
+[node name="CollisionShape2D" parent="Level 4/MovingPlatform/Platform" index="0"]
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_mjh0u")
+
+[node name="AnimationPlayer" parent="Level 4/MovingPlatform/Platform" index="1"]
+speed = 0.5
+easing = 0.0
+
+[node name="MoveLocation" parent="Level 4/MovingPlatform" index="1"]
+position = Vector2(125, -1)
+
+[node name="Player" parent="Level 4" groups=["Rigidbody"] instance=ExtResource("4_s32si")]
+position = Vector2(234, 345)
+safe_margin = 0.9
+
+[node name="Box" parent="Level 4" instance=ExtResource("5_gubyk")]
+position = Vector2(356, 177)
+mass = 20.0
+
+[node name="Box2" parent="Level 4" instance=ExtResource("5_gubyk")]
+position = Vector2(334, 177)
+mass = 20.0
+
+[node name="Box3" parent="Level 4" instance=ExtResource("5_gubyk")]
+position = Vector2(344, 157)
+mass = 20.0
+
+[node name="Camera2D" type="Camera2D" parent="Level 4"]
+position = Vector2(405, 242)
+zoom = Vector2(1.8, 1.8)
+
+[node name="Kill" parent="Level 4" instance=ExtResource("7_pk6ae")]
+position = Vector2(448, 370)
+scale = Vector2(17.0614, 0.689646)
+
+[node name="TestFloor7" type="StaticBody2D" parent="Level 4"]
+position = Vector2(1024, 256)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor7"]
+position = Vector2(-795.169, 111)
+shape = SubResource("RectangleShape2D_wayxd")
+
+[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor7"]
+offset_left = -828.0
+offset_top = 102.0
+offset_right = -741.0
+offset_bottom = 120.0
+
+[node name="TestFloor8" type="StaticBody2D" parent="Level 4"]
+position = Vector2(1024, 256)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor8"]
+position = Vector2(-433, 44)
+shape = SubResource("RectangleShape2D_ikhm0")
+
+[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor8"]
+offset_left = -466.0
+offset_top = 34.0
+offset_right = -406.0
+offset_bottom = 54.0
+
+[node name="TestFloor3" type="StaticBody2D" parent="Level 4"]
+position = Vector2(512, 128)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor3"]
+position = Vector2(-226.326, 68.75)
+shape = SubResource("RectangleShape2D_3xeoo")
+
+[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor3"]
+offset_left = -317.0
+offset_top = 60.0
+offset_right = -137.0
+offset_bottom = 77.0
+
+[node name="TestFloor6" type="StaticBody2D" parent="Level 4"]
+position = Vector2(511, 110)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor6"]
+position = Vector2(-222.5, 66)
+shape = SubResource("RectangleShape2D_ehwj7")
+
+[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor6"]
+offset_left = -228.0
+offset_top = -4.0
+offset_right = -217.0
+offset_bottom = 136.0
+
+[node name="TestFloor4" type="StaticBody2D" parent="Level 4"]
+position = Vector2(613, 296)
+rotation = 1.56581
+scale = Vector2(0.541512, 1.00157)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor4"]
+position = Vector2(-99.6779, -10.9998)
+shape = SubResource("RectangleShape2D_ubx3w")
+
+[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor4"]
+offset_left = -351.0
+offset_top = -22.0
+offset_right = 149.0
+
+[node name="TestFloor5" type="StaticBody2D" parent="Level 4"]
+position = Vector2(177, 303)
+rotation = 1.56581
+scale = Vector2(0.541512, 1.00157)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor5"]
+position = Vector2(-113.523, -9.28455)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ode1c")
+
+[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor5"]
+offset_left = -362.0
+offset_top = -20.0
+offset_right = 136.0
+offset_bottom = 2.0
+
+[node name="name" parent="Level 4" instance=ExtResource("6_ggx45")]
+offset_right = 615.0
+text = "LEVEL 4
+"
+
+[node name="Killbrick" parent="Level 4" instance=ExtResource("7_pk6ae")]
+visible = false
+position = Vector2(405, 99)
+scale = Vector2(22.6127, 0.705608)
+
+[node name="Lava" parent="Level 4/Killbrick" index="2"]
+volume_db = -12.568
+autoplay = false
+
+[node name="Label" type="Label" parent="Level 4"]
+offset_left = 202.0
+offset_top = 178.0
+offset_right = 382.0
+offset_bottom = 201.0
+scale = Vector2(0.200002, 0.259124)
+text = "the square is after you"
+label_settings = SubResource("LabelSettings_iepa0")
+
+[node name="Door" parent="Level 4" node_paths=PackedStringArray("game_manager") instance=ExtResource("8_jrmuk")]
+position = Vector2(588, 271)
+game_manager = NodePath("../..")
+
+[node name="Lava" type="CPUParticles2D" parent="Level 4"]
+position = Vector2(447, 364)
+scale = Vector2(6.91901, 0.72)
+amount = 3
+lifetime = 0.3
+speed_scale = 0.3
+explosiveness = 0.33
+emission_shape = 2
+emission_sphere_radius = 10.05
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 50.0
+initial_velocity_max = 79.8
+scale_amount_min = 0.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_oenis")
+color = Color(1, 0.501705, 0.440411, 1)
+color_ramp = SubResource("Gradient_sl8mh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level 4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/StaticBody2D"]
+position = Vector2(448.5, 372.25)
+shape = SubResource("RectangleShape2D_6bci1")
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("9_h4wax")]
+visible = false
+offset_left = 174.0
+offset_top = 108.0
+offset_right = 174.0
+offset_bottom = 108.0
+game_manager = NodePath("..")
+
+[node name="CompleteScreen" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("10_5hn6c")]
+visible = false
+offset_left = 173.0
+offset_top = 108.0
+offset_right = 173.0
+offset_bottom = 108.0
+game_manager = NodePath("..")
+
+[connection signal="body_entered" from="Level 4/Kill2" to="Level 4/Player" method="_on_kill_body_entered"]
+[connection signal="body_entered" from="Level 4/Kill3" to="Level 4/Player" method="_on_kill_body_entered"]
+[connection signal="body_entered" from="Level 4/Kill" to="Level 4/Player" method="_on_kill_body_entered"]
+[connection signal="body_entered" from="Level 4/Killbrick" to="Level 4/Player" method="_on_kill_body_entered"]
+
+[editable path="Level 4/MovingPlatform"]
+[editable path="Level 4/Killbrick"]

@@ -102,7 +102,6 @@ stream = ExtResource("5_yu87d")
 bus = &"SFX"
 
 [node name="Level1" type="Button" parent="."]
-layout_mode = 0
 offset_left = 192.0
 offset_top = 256.0
 offset_right = 257.0
@@ -119,7 +118,6 @@ text = "
 "
 
 [node name="Level2" type="Button" parent="."]
-layout_mode = 0
 offset_left = 320.0
 offset_top = 256.0
 offset_right = 385.0
@@ -134,7 +132,6 @@ offset_right = 32.0
 offset_bottom = -1.0
 
 [node name="Level3" type="Button" parent="."]
-layout_mode = 0
 offset_left = 448.0
 offset_top = 256.0
 offset_right = 513.0
@@ -149,7 +146,6 @@ offset_right = 32.0
 offset_bottom = -1.0
 
 [node name="Level4" type="Button" parent="."]
-layout_mode = 0
 offset_left = 576.0
 offset_top = 256.0
 offset_right = 641.0

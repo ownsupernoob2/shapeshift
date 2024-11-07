@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdwfvn5f8b1uw"]
+[gd_scene load_steps=7 format=3 uid="uid://cdwfvn5f8b1uw"]
 
 [ext_resource type="Script" path="res://scripts/complete_screen.gd" id="1_gd6c3"]
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="2_w3eui"]
 [ext_resource type="Theme" uid="uid://e1cukr0ffdpe" path="res://assets/texture/menu.tres" id="3_q6efi"]
+[ext_resource type="AudioStream" uid="uid://dvq32k341beov" path="res://assets/sfx/complete.wav" id="4_n6scc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5dgk0"]
 font = ExtResource("2_w3eui")
@@ -79,5 +80,10 @@ scale = Vector2(0.30072, 0.292961)
 text = "0.00 sec"
 label_settings = SubResource("LabelSettings_e4uxu")
 
+[node name="CompleteSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_n6scc")
+bus = &"SFX"
+
 [connection signal="pressed" from="Panel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Panel/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Panel/NextButton" to="." method="_on_next_button_pressed"]
