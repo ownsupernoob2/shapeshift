@@ -30,6 +30,7 @@ var type = Types.CIRCLE
 var state = States.FALLING
 var prev_state = null
 var state_timeout = false
+var previous_platform_pos: Vector2
 
 @onready var wall_delay: Timer = $WallDelay
 @onready var state_change_timer: Timer = $StateChangeTimer
@@ -54,14 +55,7 @@ enum States {
 	FALLING
 }
 
-enum Actions {
-	MOVE_LEFT,
-	MOVE_RIGHT,
-	MOVE_UP,
-	MOVE_DOWN,
-	FALL,
-	IDLE
-}
+var previous_move
 
 func _ready():
 	switch_timer = Timer.new()
@@ -80,9 +74,26 @@ func _physics_process(delta: float) -> void:
 		_process_gravity()
 		velocity += gravity * delta
 		move_and_slide()
+
+
+	if state == States.CEILING and _ray_up():
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			var platform = collision.get_collider()
+			if platform is AnimatableBody2D:
+				if previous_platform_pos == Vector2.ZERO:
+					previous_platform_pos = platform.position
+					return
+					
+				var platform_movement = platform.position - previous_platform_pos
+				platform_movement.x = clamp(platform_movement.x, -10, 10)
+				position.x += platform_movement.x
+				
+				previous_platform_pos = platform.position
+	else:
+		previous_platform_pos = Vector2.ZERO
 		_update_state()
 		_process_animation(delta)
-	
 		for i in get_slide_collision_count():
 			var c = get_slide_collision(i)
 			if type == Types.SQUARE:
@@ -149,14 +160,18 @@ func _handle_default_movement(delta: float):
 			velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 
 		if Input.is_action_pressed("move_right"):
+			previous_move = "right"
 			velocity.x += speed
 		if Input.is_action_pressed("move_left"):
+			previous_move = "left"
 			velocity.x -= speed
 
 		if Input.is_action_pressed("move_up") and type == Types.CIRCLE and state == States.FLOOR:
 			velocity.y = jump_speed
+			previous_move = "up"
 		if type == Types.TRIANGLE:
 			if Input.is_action_pressed("move_up") and state == States.FLOOR:
+				previous_move = "up"
 				if _ray_right():
 					_enter_state(States.WALL_RIGHT)
 				if _ray_left():
@@ -164,6 +179,7 @@ func _handle_default_movement(delta: float):
 
 			if state == States.CEILING:
 				if Input.is_action_pressed("move_down"):
+					previous_move = "down"
 					if _ray_right():
 						_enter_state(States.WALL_RIGHT)
 					elif _ray_left():
@@ -173,26 +189,36 @@ func _handle_default_movement(delta: float):
 
 	if type == Types.TRIANGLE and (state == States.WALL_LEFT or state == States.WALL_RIGHT):
 		velocity.y = 0 
-
 		if Input.is_action_pressed("move_down"):
+			previous_move = "down"
 			velocity.y += speed
 		if Input.is_action_pressed("move_up"):
+			previous_move = "up"
 			velocity.y -= speed
 	
-	if _ray_top_right() and not _ray_up() and not _ray_right() and (Input.is_action_pressed("move_left") or Input.is_action_just_pressed("move_up")):
-		global_position.x += -1
+	if _ray_top_right() and not _ray_up() and not _ray_right() and (previous_move == "left" or "up" ):
 		global_position.y += -3
-	if _ray_top_left() and not _ray_up() and not _ray_left() and (Input.is_action_pressed("move_right") or Input.is_action_just_pressed("move_up")):
+	if _ray_top_right() and not _ray_up() and not _ray_right() and (previous_move == "down" ):
+		global_position.x += 5
+		global_position.y += 2
+	if _ray_bottom_right() and not _ray_down() and not _ray_right()  and (previous_move == "up"):
+		global_position.x += 4
+		global_position.y += -3
+	if _ray_bottom_right() and not _ray_down() and not _ray_right()  and (previous_move == "left"):
+		global_position.y += 3
+		
+	if _ray_top_left() and not _ray_up() and not _ray_left() and  (previous_move == "right" or "up" ):
 		print('hi')
 		global_position.y += -3
-		global_position.x += 1
-	if _ray_top_right() and not _ray_up() and not _ray_right() and Input.is_action_pressed("move_down"):
-		global_position.x += 1
-		global_position.y += 5
-	if _ray_bottom_right() and not _ray_down() and not _ray_right() and  Input.is_action_pressed("move_left"):
-		global_position.x += 1
+	if _ray_top_left() and not _ray_up() and not _ray_left() and (previous_move == "down" ):
+		global_position.x += -5
 		global_position.y += 2
-
+	if _ray_bottom_left() and not _ray_down() and not _ray_left()  and (previous_move == "up"):
+		global_position.x += -4
+		global_position.y += -3
+	if _ray_bottom_left() and not _ray_down() and not _ray_left()  and (previous_move == "right"):
+		global_position.y += 3
+		
 
 	
 	if _ray_down():
@@ -236,7 +262,7 @@ func _process_gravity():
 				if _ray_down():
 					gravity = Vector2(0, gravity_speed * 100)
 				else:
-					gravity = Vector2(0, gravity_speed * 1.2)
+					gravity = Vector2(0, gravity_speed * 2)
 	else:
 		gravity = Vector2(0, gravity_speed)
 
@@ -314,20 +340,26 @@ func _process_animation(delta: float):
 		var rotation_speed = velocity.x * 0.05 
 		body.rotate(rotation_speed * delta)
 		face.rotate(rotation_speed * delta)
-	else:
+	elif type == Types.TRIANGLE:
 		match state:
+			States.FLOOR:
+				body.rotation_degrees = 0
+				face.rotation_degrees = 0
 			States.WALL_LEFT:
 				body.rotation_degrees = 90
-				face.rotation_degrees = 90 
+				face.rotation_degrees = 90
 			States.WALL_RIGHT:
 				body.rotation_degrees = -90
 				face.rotation_degrees = -90
 			States.CEILING:
 				body.rotation_degrees = 180
-				face.rotation_degrees = 180 
-			_:  
+				face.rotation_degrees = 180
+			_:
 				body.rotation_degrees = 0
 				face.rotation_degrees = 0
+	else:
+		body.rotation_degrees = 0
+		face.rotation_degrees = 0
 
 func _on_kill_body_entered(body: Node2D) -> void:
 	if (body == self):

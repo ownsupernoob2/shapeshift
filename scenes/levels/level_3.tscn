@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bxjomegpmfebh"]
+[gd_scene load_steps=27 format=3 uid="uid://bxjomegpmfebh"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_y80st"]
 [ext_resource type="Texture2D" uid="uid://bgb13oebx4k35" path="res://assets/texture/0aee6ff8b80a9594b0290f50ac15918e.jpg" id="2_gmnos"]
@@ -13,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="12_b3p23"]
 [ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="12_svuk4"]
 [ext_resource type="PackedScene" uid="uid://cdwfvn5f8b1uw" path="res://scenes/complete_screen.tscn" id="13_2yuc7"]
+[ext_resource type="PackedScene" uid="uid://hpsmycjvshh0" path="res://world_environment.tscn" id="13_oe3ks"]
 [ext_resource type="PackedScene" uid="uid://bi2kwimix0xfq" path="res://scenes/level_name.tscn" id="15_a3tvc"]
 
 [sub_resource type="Gradient" id="Gradient_d77vw"]
@@ -243,6 +244,8 @@ offset_top = 151.0
 offset_right = 610.0
 offset_bottom = 244.0
 text = "LEVEL 3"
+
+[node name="WorldEnvironment" parent="Level 3" instance=ExtResource("13_oe3ks")]
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("12_svuk4")]
 visible = false

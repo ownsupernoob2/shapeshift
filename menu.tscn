@@ -103,11 +103,6 @@ rotation = 3.13331
 texture = ExtResource("3_768e0")
 offset = Vector2(0.108093, 1.02103)
 
-[node name="TileHalfLeft" type="Sprite2D" parent="circle"]
-position = Vector2(-79.9639, -218.382)
-rotation = 2.94959
-texture = ExtResource("5_hpyn8")
-
 [node name="rombus" type="Node2D" parent="."]
 position = Vector2(131, 31)
 
@@ -177,6 +172,11 @@ position = Vector2(105, 364)
 rotation = 0.490525
 scale = Vector2(0.790453, 0.633392)
 texture = ExtResource("15_ikfv6")
+
+[node name="TileHalfLeft" type="Sprite2D" parent="stuff"]
+position = Vector2(75.0001, 377)
+rotation = 0.44675
+texture = ExtResource("5_hpyn8")
 
 [node name="TileLeft" type="Sprite2D" parent="stuff"]
 position = Vector2(655.348, 399.348)

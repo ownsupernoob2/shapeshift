@@ -13,6 +13,7 @@ rotation = 0.785398
 shape = SubResource("RectangleShape2D_oa072")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.8, 1.8, 1.8, 1)
 position = Vector2(0.0787445, 0.204551)
 rotation = 3.14159
 scale = Vector2(0.171138, 0.177271)

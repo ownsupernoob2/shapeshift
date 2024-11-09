@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bo01mu1wq7nyw"]
+[gd_scene load_steps=26 format=3 uid="uid://bo01mu1wq7nyw"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_biyro"]
 [ext_resource type="Texture2D" uid="uid://bgb13oebx4k35" path="res://assets/texture/0aee6ff8b80a9594b0290f50ac15918e.jpg" id="2_rsy33"]
@@ -11,13 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scenes/door.tscn" id="8_jrmuk"]
 [ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="9_h4wax"]
 [ext_resource type="PackedScene" uid="uid://cdwfvn5f8b1uw" path="res://scenes/complete_screen.tscn" id="10_5hn6c"]
+[ext_resource type="PackedScene" uid="uid://hpsmycjvshh0" path="res://world_environment.tscn" id="10_q3js8"]
 
-[sub_resource type="Gradient" id="Gradient_d77vw"]
+[sub_resource type="Gradient" id="Gradient_ahrf1"]
 offsets = PackedFloat32Array(0, 0.5, 0.954545, 0.967532, 1)
 colors = PackedColorArray(0.246153, 0.256821, 0.233204, 1, 0.231438, 0.235523, 0.229429, 1, 0.354747, 0.375782, 0.367043, 1, 0.337131, 0.355745, 0.347384, 1, 0.369043, 0.392044, 0.382999, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gxlrp"]
-gradient = SubResource("Gradient_d77vw")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddfxp"]
+gradient = SubResource("Gradient_ahrf1")
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0, 0)
 
@@ -26,13 +27,13 @@ resource_local_to_scene = true
 size = Vector2(52.1071, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wayxd"]
-size = Vector2(106.337, 18)
+size = Vector2(103, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikhm0"]
-size = Vector2(65, 20)
+size = Vector2(91.75, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xeoo"]
-size = Vector2(178.652, 16.5)
+size = Vector2(167.652, 16.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehwj7"]
 size = Vector2(11, 140)
@@ -54,7 +55,7 @@ point_count = 2
 colors = PackedColorArray(1, 1, 1, 1, 0.266575, 0.266575, 0.266575, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bci1"]
-size = Vector2(331, 11.5)
+size = Vector2(331, 11)
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_biyro")
@@ -64,11 +65,11 @@ current_level = 4
 
 [node name="TextureRect" type="TextureRect" parent="Level 4"]
 offset_left = 10.0
-offset_top = -6.0
+offset_top = -9.0
 offset_right = 828.0
-offset_bottom = 480.0
+offset_bottom = 477.0
 size_flags_vertical = 8
-texture = SubResource("GradientTexture2D_gxlrp")
+texture = SubResource("GradientTexture2D_ddfxp")
 
 [node name="ColorRect" type="ColorRect" parent="Level 4"]
 offset_left = 195.0
@@ -104,7 +105,7 @@ position = Vector2(0, -9.5)
 shape = SubResource("RectangleShape2D_mjh0u")
 
 [node name="AnimationPlayer" parent="Level 4/MovingPlatform/Platform" index="1"]
-speed = 0.5
+speed = 1.0
 easing = 0.0
 
 [node name="MoveLocation" parent="Level 4/MovingPlatform" index="1"]
@@ -140,7 +141,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor7"]
-position = Vector2(-795.169, 111)
+position = Vector2(-793.5, 110)
 shape = SubResource("RectangleShape2D_wayxd")
 
 [node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor7"]
@@ -155,7 +156,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor8"]
-position = Vector2(-433, 44)
+position = Vector2(-420.125, 44)
 shape = SubResource("RectangleShape2D_ikhm0")
 
 [node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor8"]
@@ -219,7 +220,6 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor5"]
 position = Vector2(-113.523, -9.28455)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ode1c")
 
 [node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor5"]
@@ -230,7 +230,7 @@ offset_bottom = 2.0
 
 [node name="name" parent="Level 4" instance=ExtResource("6_ggx45")]
 offset_right = 615.0
-text = "LEVEL 4
+text = "LEVEL 5
 "
 
 [node name="Killbrick" parent="Level 4" instance=ExtResource("7_pk6ae")]
@@ -278,8 +278,10 @@ color_ramp = SubResource("Gradient_sl8mh")
 [node name="StaticBody2D" type="StaticBody2D" parent="Level 4"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/StaticBody2D"]
-position = Vector2(448.5, 372.25)
+position = Vector2(448.5, 372.5)
 shape = SubResource("RectangleShape2D_6bci1")
+
+[node name="WorldEnvironment" parent="Level 4" instance=ExtResource("10_q3js8")]
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("9_h4wax")]
 visible = false

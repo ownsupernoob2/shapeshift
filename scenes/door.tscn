@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://gyclghbovt4d"]
+[gd_scene load_steps=12 format=3 uid="uid://gyclghbovt4d"]
 
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_2y2te"]
 [ext_resource type="Script" path="res://scripts/speedrun.gd" id="2_3toox"]
@@ -17,6 +17,23 @@ colors = PackedColorArray(1.37173e-06, 0.262366, 0.356734, 1, 0, 0.692918, 0.824
 gradient = SubResource("Gradient_52xha")
 fill_from = Vector2(0.481651, 1)
 fill_to = Vector2(0.5, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek1et"]
+size = Vector2(107, 55)
+
+[sub_resource type="Gradient" id="Gradient_s21ys"]
+colors = PackedColorArray(0.182484, 0.197623, 0.202424, 1, 0.330981, 0.367987, 0.368836, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d27x6"]
+gradient = SubResource("Gradient_s21ys")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Curve" id="Curve_2fn3t"]
+_data = [Vector2(0.0955056, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.285714), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_dcjpy"]
+colors = PackedColorArray(1, 1, 1, 1, 0.266575, 0.266575, 0.266575, 1)
 
 [node name="Door" type="Area2D"]
 collision_layer = 7
@@ -51,4 +68,53 @@ offset_bottom = 46.0
 scale = Vector2(0.279999, 0.583383)
 texture = SubResource("GradientTexture2D_mfcmn")
 
+[node name="DoorSensor" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorSensor"]
+position = Vector2(0.5, -8.5)
+shape = SubResource("RectangleShape2D_ek1et")
+
+[node name="LeftDoor" type="CharacterBody2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="LeftDoor"]
+offset_top = -19.0
+offset_right = 64.0
+offset_bottom = 45.0
+scale = Vector2(0.159998, 0.6)
+texture = SubResource("GradientTexture2D_d27x6")
+
+[node name="RightDoor" type="CharacterBody2D" parent="."]
+
+[node name="TextureRect2" type="TextureRect" parent="RightDoor"]
+offset_left = -10.0
+offset_top = -19.0
+offset_right = 54.0
+offset_bottom = 45.0
+scale = Vector2(0.159998, 0.6)
+texture = SubResource("GradientTexture2D_d27x6")
+
+[node name="Lava" type="CPUParticles2D" parent="."]
+position = Vector2(3.05176e-05, -1)
+scale = Vector2(5.54758, 1)
+amount = 3
+lifetime = 0.2
+speed_scale = 0.2
+explosiveness = 0.33
+randomness = 1.0
+lifetime_randomness = 0.07
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 50.0
+initial_velocity_max = 79.8
+scale_amount_min = 0.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_2fn3t")
+color = Color(2.21401e-06, 0.765756, 0.773099, 1)
+color_ramp = SubResource("Gradient_dcjpy")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="DoorSensor" to="." method="_on_door_sensor_body_entered"]
+[connection signal="body_exited" from="DoorSensor" to="." method="_on_door_sensor_body_exited"]

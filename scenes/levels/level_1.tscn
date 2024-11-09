@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwid3bke3mkb"]
+[gd_scene load_steps=20 format=3 uid="uid://cwid3bke3mkb"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_0urae"]
 [ext_resource type="Texture2D" uid="uid://bgb13oebx4k35" path="res://assets/texture/0aee6ff8b80a9594b0290f50ac15918e.jpg" id="2_26lxo"]
@@ -10,13 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="8_2g1v6"]
 [ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scenes/kill.tscn" id="8_klevp"]
 [ext_resource type="PackedScene" uid="uid://cdwfvn5f8b1uw" path="res://scenes/complete_screen.tscn" id="8_st7np"]
+[ext_resource type="PackedScene" uid="uid://hpsmycjvshh0" path="res://world_environment.tscn" id="11_00172"]
 
-[sub_resource type="Gradient" id="Gradient_2ucto"]
+[sub_resource type="Gradient" id="Gradient_vkklu"]
 offsets = PackedFloat32Array(0, 0.5, 0.954545, 0.967532, 1)
 colors = PackedColorArray(0.246153, 0.256821, 0.233204, 1, 0.231438, 0.235523, 0.229429, 1, 0.354747, 0.375782, 0.367043, 1, 0.337131, 0.355745, 0.347384, 1, 0.369043, 0.392044, 0.382999, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_t5b5e"]
-gradient = SubResource("Gradient_2ucto")
+gradient = SubResource("Gradient_vkklu")
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0, 0)
 
@@ -240,6 +241,8 @@ offset_top = 108.0
 offset_right = 174.0
 offset_bottom = 108.0
 game_manager = NodePath("..")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("11_00172")]
 
 [node name="CompleteScreen" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("8_st7np")]
 visible = false
