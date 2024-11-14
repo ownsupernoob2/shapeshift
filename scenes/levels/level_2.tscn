@@ -109,6 +109,9 @@ position = Vector2(238, 358)
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_pyjym")
 
+[node name="AnimationPlayer" parent="Level 2/MovingPlatform/Platform" index="1"]
+speed = 0.25
+
 [node name="MoveLocation" parent="Level 2/MovingPlatform" index="1"]
 position = Vector2(205, -9)
 
@@ -193,17 +196,10 @@ offset_top = -219.0
 offset_right = 75.0
 offset_bottom = 38.0
 
-[node name="KeyDropTimer" type="Timer" parent="Level 2"]
-process_callback = 0
-autostart = true
-
 [node name="Killbrick" parent="Level 2" instance=ExtResource("6_tqxv5")]
 visible = false
 position = Vector2(409, 99)
 scale = Vector2(22.6127, 0.705608)
-
-[node name="Lava" parent="Level 2/Killbrick" index="2"]
-autoplay = false
 
 [node name="CompleteScreen" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("8_4no7r")]
 visible = false
@@ -225,7 +221,6 @@ game_manager = NodePath("..")
 
 [connection signal="body_entered" from="Level 2/Door" to="Level 2/Player" method="_on_door_body_entered"]
 [connection signal="body_entered" from="Level 2/Kill" to="Level 2/Player" method="_on_kill_body_entered"]
-[connection signal="timeout" from="Level 2/KeyDropTimer" to="Level 2/Player" method="_on_key_drop_timer_timeout"]
 [connection signal="body_entered" from="Level 2/Killbrick" to="Level 2/Player" method="_on_kill_body_entered"]
 
 [editable path="Level 2/MovingPlatform"]

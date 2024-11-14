@@ -1,267 +1,89 @@
-[gd_scene load_steps=26 format=3 uid="uid://bo01mu1wq7nyw"]
+[gd_scene load_steps=27 format=3 uid="uid://bo01mu1wq7nyw"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_biyro"]
 [ext_resource type="Texture2D" uid="uid://bgb13oebx4k35" path="res://assets/texture/0aee6ff8b80a9594b0290f50ac15918e.jpg" id="2_rsy33"]
+[ext_resource type="Texture2D" uid="uid://uwdhg5eo2q83" path="res://assets/sprite/brick-1.png" id="3_ot7rd"]
 [ext_resource type="PackedScene" uid="uid://kjen34bt1yum" path="res://scenes/moving_platform.tscn" id="3_y41y7"]
 [ext_resource type="PackedScene" uid="uid://cgdptq1shqro5" path="res://scenes/spike.tscn" id="3_y74j2"]
 [ext_resource type="PackedScene" uid="uid://dm8pfg3wjkktn" path="res://scenes/player.tscn" id="4_s32si"]
 [ext_resource type="PackedScene" uid="uid://bfuj0f6mb7nrv" path="res://scenes/box.tscn" id="5_gubyk"]
 [ext_resource type="PackedScene" uid="uid://bi2kwimix0xfq" path="res://scenes/level_name.tscn" id="6_ggx45"]
+[ext_resource type="PackedScene" uid="uid://cr3bdgs7cr8jc" path="res://scenes/key.tscn" id="7_dkr5d"]
 [ext_resource type="PackedScene" uid="uid://83eycb0ia8c2" path="res://scenes/kill.tscn" id="7_pk6ae"]
 [ext_resource type="PackedScene" uid="uid://gyclghbovt4d" path="res://scenes/door.tscn" id="8_jrmuk"]
 [ext_resource type="PackedScene" uid="uid://cmivsxpmp1yq6" path="res://scenes/pause_menu.tscn" id="9_h4wax"]
 [ext_resource type="PackedScene" uid="uid://cdwfvn5f8b1uw" path="res://scenes/complete_screen.tscn" id="10_5hn6c"]
 [ext_resource type="PackedScene" uid="uid://hpsmycjvshh0" path="res://world_environment.tscn" id="10_q3js8"]
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="11_08mya"]
 
-[sub_resource type="Gradient" id="Gradient_ahrf1"]
+[sub_resource type="Gradient" id="Gradient_d77vw"]
 offsets = PackedFloat32Array(0, 0.5, 0.954545, 0.967532, 1)
 colors = PackedColorArray(0.246153, 0.256821, 0.233204, 1, 0.231438, 0.235523, 0.229429, 1, 0.354747, 0.375782, 0.367043, 1, 0.337131, 0.355745, 0.347384, 1, 0.369043, 0.392044, 0.382999, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddfxp"]
-gradient = SubResource("Gradient_ahrf1")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t5b5e"]
+gradient = SubResource("Gradient_d77vw")
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjh0u"]
-resource_local_to_scene = true
-size = Vector2(52.1071, 19)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wayxd"]
-size = Vector2(103, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikhm0"]
-size = Vector2(91.75, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xeoo"]
-size = Vector2(167.652, 16.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehwj7"]
-size = Vector2(11, 140)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubx3w"]
-size = Vector2(494.932, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ode1c"]
-size = Vector2(493.003, 21.9553)
-
-[sub_resource type="LabelSettings" id="LabelSettings_iepa0"]
-font_color = Color(0.165656, 0.165656, 0.165656, 1)
-
-[sub_resource type="Curve" id="Curve_oenis"]
+[sub_resource type="Curve" id="Curve_ikggo"]
 _data = [Vector2(0.0955056, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.285714), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_sl8mh"]
+[sub_resource type="Gradient" id="Gradient_3oroa"]
 colors = PackedColorArray(1, 1, 1, 1, 0.266575, 0.266575, 0.266575, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bci1"]
-size = Vector2(331, 11)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o585h"]
+size = Vector2(257.5, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j88vj"]
+size = Vector2(21, 248)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqldv"]
+size = Vector2(21, 269)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8cqp"]
+size = Vector2(120.75, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_doq6m"]
+resource_local_to_scene = true
+size = Vector2(52.1071, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qguc4"]
+size = Vector2(180, 7)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jvtfc"]
+font = ExtResource("11_08mya")
+font_size = 40
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_biyro")
 current_level = 4
 
-[node name="Level 4" type="Node2D" parent="."]
+[node name="Level 3" type="Node2D" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="Level 4"]
-offset_left = 10.0
-offset_top = -9.0
-offset_right = 828.0
-offset_bottom = 477.0
-size_flags_vertical = 8
-texture = SubResource("GradientTexture2D_ddfxp")
+[node name="TextureRect" type="TextureRect" parent="Level 3"]
+offset_left = -26.0
+offset_top = -2.0
+offset_right = 792.0
+offset_bottom = 484.0
+texture = SubResource("GradientTexture2D_t5b5e")
+metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="Level 4"]
-offset_left = 195.0
-offset_top = 107.0
-offset_right = 282.0
-offset_bottom = 187.0
-color = Color(0.144063, 0.144063, 0.144063, 1)
-
-[node name="background" type="Sprite2D" parent="Level 4"]
+[node name="background" type="Sprite2D" parent="Level 3"]
 modulate = Color(1, 1, 1, 0.317647)
-position = Vector2(408.5, 246.25)
-scale = Vector2(0.620924, 0.572449)
+position = Vector2(406, 241)
+scale = Vector2(0.620924, 0.553061)
 texture = ExtResource("2_rsy33")
 
-[node name="Kill2" parent="Level 4" instance=ExtResource("3_y74j2")]
-position = Vector2(289, 214)
-rotation = 1.56581
-scale = Vector2(0.541512, 1.00157)
-
-[node name="Kill3" parent="Level 4" instance=ExtResource("3_y74j2")]
-position = Vector2(289, 231)
-rotation = 1.56581
-scale = Vector2(0.541512, 1.00157)
-
-[node name="MovingPlatform" parent="Level 4" instance=ExtResource("3_y41y7")]
-position = Vector2(232, 270)
-
-[node name="Platform" parent="Level 4/MovingPlatform" index="0"]
-position = Vector2(7, 1)
-
-[node name="CollisionShape2D" parent="Level 4/MovingPlatform/Platform" index="0"]
-position = Vector2(0, -9.5)
-shape = SubResource("RectangleShape2D_mjh0u")
-
-[node name="AnimationPlayer" parent="Level 4/MovingPlatform/Platform" index="1"]
-speed = 1.0
-easing = 0.0
-
-[node name="MoveLocation" parent="Level 4/MovingPlatform" index="1"]
-position = Vector2(125, -1)
-
-[node name="Player" parent="Level 4" groups=["Rigidbody"] instance=ExtResource("4_s32si")]
-position = Vector2(234, 345)
-safe_margin = 0.9
-
-[node name="Box" parent="Level 4" instance=ExtResource("5_gubyk")]
-position = Vector2(356, 177)
-mass = 20.0
-
-[node name="Box2" parent="Level 4" instance=ExtResource("5_gubyk")]
-position = Vector2(334, 177)
-mass = 20.0
-
-[node name="Box3" parent="Level 4" instance=ExtResource("5_gubyk")]
-position = Vector2(344, 157)
-mass = 20.0
-
-[node name="Camera2D" type="Camera2D" parent="Level 4"]
-position = Vector2(405, 242)
-zoom = Vector2(1.8, 1.8)
-
-[node name="Kill" parent="Level 4" instance=ExtResource("7_pk6ae")]
-position = Vector2(448, 370)
-scale = Vector2(17.0614, 0.689646)
-
-[node name="TestFloor7" type="StaticBody2D" parent="Level 4"]
-position = Vector2(1024, 256)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor7"]
-position = Vector2(-793.5, 110)
-shape = SubResource("RectangleShape2D_wayxd")
-
-[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor7"]
-offset_left = -828.0
-offset_top = 102.0
-offset_right = -741.0
-offset_bottom = 120.0
-
-[node name="TestFloor8" type="StaticBody2D" parent="Level 4"]
-position = Vector2(1024, 256)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor8"]
-position = Vector2(-420.125, 44)
-shape = SubResource("RectangleShape2D_ikhm0")
-
-[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor8"]
-offset_left = -466.0
-offset_top = 34.0
-offset_right = -406.0
-offset_bottom = 54.0
-
-[node name="TestFloor3" type="StaticBody2D" parent="Level 4"]
-position = Vector2(512, 128)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor3"]
-position = Vector2(-226.326, 68.75)
-shape = SubResource("RectangleShape2D_3xeoo")
-
-[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor3"]
-offset_left = -317.0
-offset_top = 60.0
-offset_right = -137.0
-offset_bottom = 77.0
-
-[node name="TestFloor6" type="StaticBody2D" parent="Level 4"]
-position = Vector2(511, 110)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor6"]
-position = Vector2(-222.5, 66)
-shape = SubResource("RectangleShape2D_ehwj7")
-
-[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor6"]
-offset_left = -228.0
-offset_top = -4.0
-offset_right = -217.0
-offset_bottom = 136.0
-
-[node name="TestFloor4" type="StaticBody2D" parent="Level 4"]
-position = Vector2(613, 296)
-rotation = 1.56581
-scale = Vector2(0.541512, 1.00157)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor4"]
-position = Vector2(-99.6779, -10.9998)
-shape = SubResource("RectangleShape2D_ubx3w")
-
-[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor4"]
-offset_left = -351.0
-offset_top = -22.0
-offset_right = 149.0
-
-[node name="TestFloor5" type="StaticBody2D" parent="Level 4"]
-position = Vector2(177, 303)
-rotation = 1.56581
-scale = Vector2(0.541512, 1.00157)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/TestFloor5"]
-position = Vector2(-113.523, -9.28455)
-shape = SubResource("RectangleShape2D_ode1c")
-
-[node name="ColorRect" type="ColorRect" parent="Level 4/TestFloor5"]
-offset_left = -362.0
-offset_top = -20.0
-offset_right = 136.0
-offset_bottom = 2.0
-
-[node name="name" parent="Level 4" instance=ExtResource("6_ggx45")]
-offset_right = 615.0
-text = "LEVEL 5
-"
-
-[node name="Killbrick" parent="Level 4" instance=ExtResource("7_pk6ae")]
-visible = false
-position = Vector2(405, 99)
-scale = Vector2(22.6127, 0.705608)
-
-[node name="Lava" parent="Level 4/Killbrick" index="2"]
-volume_db = -12.568
-autoplay = false
-
-[node name="Label" type="Label" parent="Level 4"]
-offset_left = 202.0
-offset_top = 178.0
-offset_right = 382.0
-offset_bottom = 201.0
-scale = Vector2(0.200002, 0.259124)
-text = "the square is after you"
-label_settings = SubResource("LabelSettings_iepa0")
-
-[node name="Door" parent="Level 4" node_paths=PackedStringArray("game_manager") instance=ExtResource("8_jrmuk")]
-position = Vector2(588, 271)
-game_manager = NodePath("../..")
-
-[node name="Lava" type="CPUParticles2D" parent="Level 4"]
-position = Vector2(447, 364)
-scale = Vector2(6.91901, 0.72)
+[node name="Lava" type="CPUParticles2D" parent="Level 3"]
+position = Vector2(285, 361)
+scale = Vector2(6.59901, 0.72)
 amount = 3
-lifetime = 0.3
-speed_scale = 0.3
-explosiveness = 0.33
+lifetime = 0.5
+speed_scale = 0.4
+explosiveness = 0.75
+randomness = 0.19
+lifetime_randomness = 0.4
 emission_shape = 2
 emission_sphere_radius = 10.05
 direction = Vector2(0, 0)
@@ -271,38 +93,183 @@ initial_velocity_min = 50.0
 initial_velocity_max = 79.8
 scale_amount_min = 0.0
 scale_amount_max = 10.0
-scale_amount_curve = SubResource("Curve_oenis")
+scale_amount_curve = SubResource("Curve_ikggo")
 color = Color(1, 0.501705, 0.440411, 1)
-color_ramp = SubResource("Gradient_sl8mh")
+color_ramp = SubResource("Gradient_3oroa")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Level 4"]
+[node name="Brick-1" type="Sprite2D" parent="Level 3"]
+visible = false
+position = Vector2(402.5, 242)
+scale = Vector2(0.211364, 0.161176)
+texture = ExtResource("3_ot7rd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 4/StaticBody2D"]
-position = Vector2(448.5, 372.5)
-shape = SubResource("RectangleShape2D_6bci1")
+[node name="Kill" parent="Level 3" instance=ExtResource("3_y74j2")]
+position = Vector2(514, 212)
 
-[node name="WorldEnvironment" parent="Level 4" instance=ExtResource("10_q3js8")]
+[node name="Blocks" type="Node2D" parent="Level 3"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level 3/Blocks"]
+collision_layer = 7
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 3/Blocks/StaticBody2D"]
+position = Vector2(504.75, 366.5)
+shape = SubResource("RectangleShape2D_o585h")
+
+[node name="ColorRect" type="ColorRect" parent="Level 3/Blocks/StaticBody2D"]
+offset_left = 376.0
+offset_top = 356.0
+offset_right = 633.0
+offset_bottom = 377.0
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Level 3/Blocks"]
+collision_layer = 7
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 3/Blocks/StaticBody2D2"]
+position = Vector2(622.5, 232)
+shape = SubResource("RectangleShape2D_j88vj")
+
+[node name="ColorRect" type="ColorRect" parent="Level 3/Blocks/StaticBody2D2"]
+offset_left = 612.0
+offset_top = 107.0
+offset_right = 633.0
+offset_bottom = 359.0
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Level 3/Blocks"]
+collision_layer = 7
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 3/Blocks/StaticBody2D3"]
+position = Vector2(186.5, 241.5)
+shape = SubResource("RectangleShape2D_mqldv")
+
+[node name="ColorRect" type="ColorRect" parent="Level 3/Blocks/StaticBody2D3"]
+offset_left = 176.0
+offset_top = 107.0
+offset_right = 197.0
+offset_bottom = 376.0
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Level 3/Blocks"]
+collision_layer = 7
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 3/Blocks/StaticBody2D4"]
+position = Vector2(553.375, 202)
+shape = SubResource("RectangleShape2D_c8cqp")
+
+[node name="ColorRect" type="ColorRect" parent="Level 3/Blocks/StaticBody2D4"]
+offset_left = 493.0
+offset_top = 191.0
+offset_right = 613.0
+offset_bottom = 214.0
+
+[node name="Player" parent="Level 3" groups=["Rigidbody"] instance=ExtResource("4_s32si")]
+position = Vector2(431, 333)
+safe_margin = 0.9
+
+[node name="Camera2D" type="Camera2D" parent="Level 3"]
+position = Vector2(405, 242)
+zoom = Vector2(1.8, 1.8)
+
+[node name="KeyDropTimer" type="Timer" parent="Level 3"]
+process_callback = 0
+autostart = true
+
+[node name="MovingPlatform" parent="Level 3" instance=ExtResource("3_y41y7")]
+position = Vector2(256, 200)
+
+[node name="CollisionShape2D" parent="Level 3/MovingPlatform/Platform" index="0"]
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_doq6m")
+
+[node name="AnimationPlayer" parent="Level 3/MovingPlatform/Platform" index="1"]
+speed = 0.25
+
+[node name="MoveLocation" parent="Level 3/MovingPlatform" index="1"]
+position = Vector2(189, -5)
+
+[node name="Key" parent="Level 3" instance=ExtResource("7_dkr5d")]
+position = Vector2(522, 295)
+
+[node name="Door" parent="Level 3" node_paths=PackedStringArray("game_manager") instance=ExtResource("8_jrmuk")]
+position = Vector2(551, 171)
+game_manager = NodePath("../..")
+
+[node name="Interactiables" type="Node" parent="Level 3"]
+
+[node name="Box" parent="Level 3/Interactiables" instance=ExtResource("5_gubyk")]
+position = Vector2(536, 345)
+mass = 20.0
+
+[node name="Box2" parent="Level 3/Interactiables" instance=ExtResource("5_gubyk")]
+position = Vector2(514, 345)
+mass = 20.0
+
+[node name="Box3" parent="Level 3/Interactiables" instance=ExtResource("5_gubyk")]
+position = Vector2(524, 325)
+mass = 20.0
+
+[node name="Killbrick" parent="Level 3/Interactiables" instance=ExtResource("7_pk6ae")]
+visible = false
+position = Vector2(408, 96)
+scale = Vector2(22.6127, 0.705608)
+
+[node name="Lava" parent="Level 3/Interactiables" instance=ExtResource("7_pk6ae")]
+position = Vector2(287, 369)
+scale = Vector2(8.98514, 0.840005)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level 3"]
+position = Vector2(67, 53)
+collision_layer = 7
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level 3/StaticBody2D"]
+position = Vector2(220, 319)
+shape = SubResource("RectangleShape2D_qguc4")
+
+[node name="tutorial" type="Label" parent="Level 3"]
+offset_left = 215.0
+offset_top = 281.0
+offset_right = 638.0
+offset_bottom = 425.0
+scale = Vector2(0.319998, 0.320002)
+text = "PRESS 3 TO BECOME A 
+SQUARE & PUSH BOXES"
+label_settings = SubResource("LabelSettings_jvtfc")
+
+[node name="name" parent="Level 3" instance=ExtResource("6_ggx45")]
+offset_left = 366.0
+offset_top = 151.0
+offset_right = 610.0
+offset_bottom = 244.0
+text = "LEVEL 4
+"
+
+[node name="WorldEnvironment" parent="Level 3" instance=ExtResource("10_q3js8")]
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("9_h4wax")]
 visible = false
-offset_left = 174.0
-offset_top = 108.0
-offset_right = 174.0
-offset_bottom = 108.0
+offset_left = 175.0
+offset_top = 92.0
+offset_right = 175.0
+offset_bottom = 92.0
 game_manager = NodePath("..")
 
 [node name="CompleteScreen" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("10_5hn6c")]
 visible = false
-offset_left = 173.0
-offset_top = 108.0
-offset_right = 173.0
-offset_bottom = 108.0
+offset_left = 175.0
+offset_top = 92.0
+offset_right = 175.0
+offset_bottom = 92.0
 game_manager = NodePath("..")
 
-[connection signal="body_entered" from="Level 4/Kill2" to="Level 4/Player" method="_on_kill_body_entered"]
-[connection signal="body_entered" from="Level 4/Kill3" to="Level 4/Player" method="_on_kill_body_entered"]
-[connection signal="body_entered" from="Level 4/Kill" to="Level 4/Player" method="_on_kill_body_entered"]
-[connection signal="body_entered" from="Level 4/Killbrick" to="Level 4/Player" method="_on_kill_body_entered"]
+[connection signal="body_entered" from="Level 3/Kill" to="Level 3/Player" method="_on_kill_body_entered"]
+[connection signal="timeout" from="Level 3/KeyDropTimer" to="Level 3/Player" method="_on_key_drop_timer_timeout"]
+[connection signal="body_entered" from="Level 3/Key" to="Level 3/Player" method="_on_key_body_entered"]
+[connection signal="body_entered" from="Level 3/Door" to="Level 3/Player" method="_on_door_body_entered"]
+[connection signal="body_entered" from="Level 3/Interactiables/Killbrick" to="Level 3/Player" method="_on_kill_body_entered"]
+[connection signal="body_entered" from="Level 3/Interactiables/Lava" to="Level 3/Player" method="_on_kill_body_entered"]
 
-[editable path="Level 4/MovingPlatform"]
-[editable path="Level 4/Killbrick"]
+[editable path="Level 3/MovingPlatform"]
+[editable path="Level 3/Interactiables/Killbrick"]

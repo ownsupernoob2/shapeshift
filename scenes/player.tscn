@@ -94,6 +94,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 platform_on_leave = 2
 script = ExtResource("1_cda01")
+metadata/_edit_horizontal_guides_ = [-17.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8.49974e-08, 2.19107e-08)
@@ -129,7 +130,7 @@ target_position = Vector2(-4.63456, 5.514)
 [node name="SwitchTimer" type="Timer" parent="."]
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.04308e-07, -1.04308e-07)
+position = Vector2(-2.98023e-08, -5.96046e-08)
 scale = Vector2(0.0623884, 0.06433)
 sprite_frames = SubResource("SpriteFrames_3xa1c")
 animation = &"circle"
@@ -184,6 +185,7 @@ color = Color(0.373, 0.569, 1, 1)
 [node name="Switch" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_wy5tr")
 volume_db = -4.685
+bus = &"SFX"
 
 [node name="HealthBar" parent="." instance=ExtResource("13_kwfim")]
 offset_left = -0.356505

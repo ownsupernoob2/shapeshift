@@ -5,10 +5,14 @@ extends Control
 func _ready() -> void:
 	hide()
 
+	
 
 func complete(is_shown:bool):
 	if(is_shown):
+		if Input.is_action_just_pressed("ui_accept"):
+			next()
 		show()
+	
 		$CompleteSFX.play()
 		$Panel/Label2.text = Global.speedrun_time + " sec"
 	else:
@@ -26,9 +30,13 @@ func _on_resume_button_pressed() -> void:
 
 
 func _on_next_button_pressed() -> void:
+	next()
+		
+		
+func next() -> void:
 	get_tree().paused = false
 	var next_level = game_manager.current_level + 1
-	if next_level < 5:
+	if next_level < 6:
 		get_tree().change_scene_to_file('res://scenes/levels/level_' + str(next_level) + '.tscn')
 	else:
 		get_tree().change_scene_to_file('res://scenes/level_select.tscn')

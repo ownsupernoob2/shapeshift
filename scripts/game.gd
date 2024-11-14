@@ -9,7 +9,8 @@ signal toggle_game_paused(is_paused:bool)
 	"res://scenes/level_1.tscn",
 	"res://scenes/level_2.tscn",
 	"res://scenes/level_3.tscn",
-	"res://scenes/level_4.tscn"
+	"res://scenes/level_4.tscn",
+	"res://scenes/level_5.tscn",
 ]
 
 var game_paused:bool = false:
@@ -25,6 +26,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent):
 	if Input.is_action_just_pressed("reset"):
+		get_tree().paused = false
 		get_tree().reload_current_scene()
 	if(event.is_action_pressed("ui_cancel")):
 		game_paused = !game_paused

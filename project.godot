@@ -25,6 +25,9 @@ buses/default_bus_layout="res://assets/texture/default_bus_layout.tres"
 
 AudioPlayer="*res://scenes/audio_player.tscn"
 Global="*res://global.gd"
+Plugin="*res://addons/quiver_leaderboards/plugin.gd"
+Leaderboards="*res://addons/quiver_leaderboards/leaderboards.tscn"
+PlayerAccounts="*res://addons/quiver_player_accounts/player_accounts.tscn"
 
 [display]
 
@@ -33,6 +36,10 @@ window/size/viewport_height=485
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/quiver_leaderboards/plugin.cfg", "res://addons/quiver_player_accounts/plugin.cfg")
 
 [input]
 

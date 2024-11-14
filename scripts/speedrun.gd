@@ -81,8 +81,11 @@ func _on_body_entered(body: Node2D) -> void:
 		var current_time: float = Global.level_times[game_manager.current_level]
 		if key_node:
 			if player_instance.has_key:
+				print(correct_time)
+				print(current_time)
 				if correct_time < current_time or current_time == 0.0:
 					$"../../CompleteScreen".complete(true)
+					Global.allow_submit = true
 					Global.level_times[game_manager.current_level] = float(formatted_time)
 					pause_game()
 			else:
@@ -90,7 +93,9 @@ func _on_body_entered(body: Node2D) -> void:
 		else:
 			$"../../CompleteScreen".complete(true)
 			print(Global.level_times[game_manager.current_level])
-			Global.level_times[game_manager.current_level] = float(formatted_time)
+			if correct_time < current_time or current_time == 0.0:
+				Global.allow_submit = true
+				Global.level_times[game_manager.current_level] = float(formatted_time)
 			pause_game()
 
 func pause_game() -> void:

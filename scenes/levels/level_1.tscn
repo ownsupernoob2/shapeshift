@@ -76,6 +76,10 @@ label_settings = SubResource("LabelSettings_ih4p6")
 
 [node name="name" parent="Level 1" instance=ExtResource("3_w385j")]
 
+[node name="Door" parent="Level 1" node_paths=PackedStringArray("game_manager") instance=ExtResource("7_2qh6m")]
+position = Vector2(220, 244)
+game_manager = NodePath("../..")
+
 [node name="Player" parent="Level 1" groups=["Rigidbody"] instance=ExtResource("3_a6ri6")]
 position = Vector2(548, 324)
 safe_margin = 0.9
@@ -93,10 +97,6 @@ scale = Vector2(12.5603, 0.689646)
 [node name="Kill2" parent="Level 1" instance=ExtResource("7_tuge4")]
 position = Vector2(362, 331)
 scale = Vector2(0.76, 0.639985)
-
-[node name="Door" parent="Level 1" node_paths=PackedStringArray("game_manager") instance=ExtResource("7_2qh6m")]
-position = Vector2(220, 244)
-game_manager = NodePath("../..")
 
 [node name="Lava" type="CPUParticles2D" parent="Level 1"]
 position = Vector2(311, 363)
@@ -252,6 +252,6 @@ offset_right = 173.0
 offset_bottom = 108.0
 game_manager = NodePath("..")
 
+[connection signal="body_entered" from="Level 1/Door" to="Level 1/Player" method="_on_door_body_entered"]
 [connection signal="body_entered" from="Level 1/Kill" to="Level 1/Player" method="_on_kill_body_entered"]
 [connection signal="body_entered" from="Level 1/Kill2" to="Level 1/Player" method="_on_kill_body_entered"]
-[connection signal="body_entered" from="Level 1/Door" to="Level 1/Player" method="_on_door_body_entered"]

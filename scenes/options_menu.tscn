@@ -143,7 +143,7 @@ offset_top = 295.0
 offset_right = 147.0
 offset_bottom = 344.0
 text = "PUSH BOXES
-SECRET SPY"
+BOX BOY"
 label_settings = SubResource("LabelSettings_frnkj")
 
 [node name="Node3" type="Node" parent="."]
@@ -154,7 +154,7 @@ offset_top = 104.0
 offset_right = 652.0
 offset_bottom = 127.0
 text = "ROLL YOUR WAY
-OUT OF PRISON"
+OUT OF FACILITY"
 label_settings = SubResource("LabelSettings_lidni")
 
 [node name="Circle" type="Label" parent="Node3"]
@@ -213,7 +213,7 @@ offset_top = 376.0
 offset_right = 459.0
 offset_bottom = 421.0
 theme = ExtResource("11_ir2kl")
-text = "Back"
+text = "BACK"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_jyykd")

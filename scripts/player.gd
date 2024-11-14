@@ -208,7 +208,6 @@ func _handle_default_movement(delta: float):
 		global_position.y += 3
 		
 	if _ray_top_left() and not _ray_up() and not _ray_left() and  (previous_move == "right" or "up" ):
-		print('hi')
 		global_position.y += -3
 	if _ray_top_left() and not _ray_up() and not _ray_left() and (previous_move == "down" ):
 		global_position.x += -5
@@ -226,6 +225,9 @@ func _handle_default_movement(delta: float):
 			_enter_state(States.FLOOR)
 		elif Input.is_action_pressed("move_left") and not _ray_left():
 			_enter_state(States.FLOOR)
+		elif (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_left")) and (_ray_left() or _ray_right()):
+			_enter_state(States.FLOOR)
+
 
 	elif _ray_up():
 		if Input.is_action_pressed("move_right") and not _ray_right():
@@ -251,7 +253,7 @@ func _process_gravity():
 	elif type == Types.TRIANGLE:
 		match state:
 			(States.WALL_RIGHT or States.WALL_LEFT) and States.FLOOR:
-				gravity = Vector2(0, +gravity_speed * 100)
+				gravity = Vector2(0, gravity_speed * 100)
 			States.WALL_RIGHT:
 				gravity = Vector2(gravity_speed * 100, 0)
 			States.WALL_LEFT:

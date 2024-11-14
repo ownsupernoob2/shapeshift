@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bf0uu6nnkd4nd"]
+[gd_scene load_steps=32 format=3 uid="uid://bf0uu6nnkd4nd"]
 
 [ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="1_08tva"]
 [ext_resource type="Script" path="res://menu.gd" id="1_26sb4"]
@@ -21,11 +21,18 @@
 [ext_resource type="Texture2D" uid="uid://bvoanjpbjct16" path="res://assets/sprite/PNG/Default/tile_right.png" id="17_tumst"]
 [ext_resource type="Texture2D" uid="uid://b7vtdo520wor6" path="res://assets/sprite/PNG/Default/tile_coin.png" id="18_xoemy"]
 [ext_resource type="AudioStream" uid="uid://b8no8f8watl86" path="res://assets/sfx/click.wav" id="20_in35t"]
+[ext_resource type="Texture2D" uid="uid://cdj5jqk6unf8x" path="res://assets/sprite/PNG/Double/clown.png" id="22_4uji4"]
+[ext_resource type="Texture2D" uid="uid://cw45wt5fhunsw" path="res://assets/sprite/PNG/Double/moai.png" id="22_doevu"]
+[ext_resource type="AudioStream" uid="uid://dr6kij00itb71" path="res://assets/music/moai.mp3" id="23_bkgfo"]
+[ext_resource type="AudioStream" uid="uid://dgaig0afclk5j" path="res://assets/music/clown.mp3" id="23_nowbx"]
+[ext_resource type="Texture2D" uid="uid://c1ghgf23bmgrh" path="res://assets/sprite/PNG/Double/gojo.jpg" id="24_ise8u"]
+[ext_resource type="AudioStream" uid="uid://ddhxm8l6rnglv" path="res://assets/music/gojo.wav" id="25_b2ufl"]
+[ext_resource type="Texture2D" uid="uid://cie34vh34sue4" path="res://assets/sprite/PNG/Double/gojo2.jpg" id="28_huc25"]
 
 [sub_resource type="Theme" id="Theme_yeaqk"]
 
 [sub_resource type="Theme" id="Theme_3sjor"]
-VBoxContainer/constants/separation = 50
+VBoxContainer/constants/separation = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_t5aq1"]
 font = ExtResource("1_08tva")
@@ -51,10 +58,10 @@ texture = ExtResource("2_h7tyk")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 357.0
-offset_top = 226.0
-offset_right = 475.0
-offset_bottom = 461.0
+offset_left = 306.0
+offset_top = 216.0
+offset_right = 498.0
+offset_bottom = 542.0
 theme = SubResource("Theme_yeaqk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -66,6 +73,11 @@ layout_mode = 2
 theme = ExtResource("2_ykeky")
 text = "PLAY
 "
+
+[node name="Leaderboard" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_ykeky")
+text = "LEADERBOARD"
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -121,7 +133,7 @@ rotation = -0.504573
 texture = ExtResource("8_333v2")
 
 [node name="HandYellowPoint" type="Sprite2D" parent="rombus"]
-position = Vector2(441, 224)
+position = Vector2(442, 208)
 rotation = -2.33757
 texture = ExtResource("9_ngo4u")
 
@@ -201,6 +213,67 @@ texture = ExtResource("15_ikfv6")
 stream = ExtResource("20_in35t")
 bus = &"SFX"
 
+[node name="Moai" type="Sprite2D" parent="."]
+position = Vector2(648, 227)
+rotation = -0.310323
+scale = Vector2(0.937601, 0.858062)
+skew = -0.0233088
+texture = ExtResource("22_doevu")
+
+[node name="Moai" type="Sprite2D" parent="Moai"]
+position = Vector2(-402.492, -361.438)
+rotation = 0.642991
+scale = Vector2(-1.3441, 0.821657)
+texture = ExtResource("22_doevu")
+
+[node name="Moai2" type="AudioStreamPlayer" parent="Moai/Moai"]
+stream = ExtResource("23_bkgfo")
+parameters/looping = true
+
+[node name="Moai" type="Sprite2D" parent="Moai/Moai"]
+position = Vector2(-351.967, -173.209)
+rotation = 0.642991
+scale = Vector2(-1.3441, 0.821657)
+texture = ExtResource("22_doevu")
+
+[node name="Gojo" type="Sprite2D" parent="."]
+position = Vector2(644.922, 167.52)
+rotation = -0.102112
+scale = Vector2(0.126268, 0.848761)
+texture = ExtResource("24_ise8u")
+
+[node name="Gojo" type="AudioStreamPlayer" parent="Gojo"]
+stream = ExtResource("25_b2ufl")
+parameters/looping = true
+
+[node name="Clown" type="Sprite2D" parent="."]
+position = Vector2(182.741, 62.7394)
+rotation = 0.798211
+scale = Vector2(0.109954, 0.106733)
+texture = ExtResource("22_4uji4")
+
+[node name="Clown2" type="AudioStreamPlayer" parent="Clown"]
+stream = ExtResource("23_nowbx")
+parameters/looping = true
+
+[node name="Clown" type="Sprite2D" parent="Clown"]
+position = Vector2(2915.76, -3185.63)
+rotation = -1.01751
+scale = Vector2(0.954379, 1.12834)
+texture = ExtResource("22_4uji4")
+
+[node name="Clown" type="Sprite2D" parent="Clown/Clown"]
+position = Vector2(-310.878, 1490.23)
+rotation = -1.01751
+scale = Vector2(0.954379, 1.12834)
+texture = ExtResource("22_4uji4")
+
+[node name="Gojo2" type="Sprite2D" parent="."]
+position = Vector2(158, 324)
+scale = Vector2(0.314844, 0.338125)
+texture = ExtResource("28_huc25")
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

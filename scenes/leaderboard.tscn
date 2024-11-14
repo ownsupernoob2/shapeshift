@@ -1,0 +1,311 @@
+[gd_scene load_steps=14 format=3 uid="uid://bfoyu772q5jyk"]
+
+[ext_resource type="Script" path="res://scenes/leaderboard.gd" id="1_ebgsw"]
+[ext_resource type="Texture2D" uid="uid://bwab3atf26365" path="res://assets/texture/options_menu.tres" id="2_52wr0"]
+[ext_resource type="Texture2D" uid="uid://dqh5db3rwloxw" path="res://assets/sprite/PNG/Default/tile_cloud.png" id="3_21v2q"]
+[ext_resource type="FontFile" uid="uid://d2um1g7tuuta4" path="res://assets/fonts/Madimi_One/MadimiOne-Regular.ttf" id="4_gpkby"]
+[ext_resource type="Theme" uid="uid://b4c4jsm4ep4sd" path="res://assets/texture/leaderboard.tres" id="7_aqtpn"]
+[ext_resource type="Script" path="res://scripts/grid_container.gd" id="7_mbqmu"]
+[ext_resource type="Theme" uid="uid://e1cukr0ffdpe" path="res://assets/texture/menu.tres" id="11_6vldr"]
+[ext_resource type="AudioStream" uid="uid://b8no8f8watl86" path="res://assets/sfx/click.wav" id="12_75ve0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t5aq1"]
+font = ExtResource("4_gpkby")
+font_size = 50
+outline_size = 1
+shadow_size = 20
+shadow_color = Color(0.139184, 0.351246, 0.332102, 0.682353)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1e5q"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"level_1",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"level_2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"level_3",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"level_4",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_17nn0"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_q13ym"]
+font = ExtResource("4_gpkby")
+font_size = 70
+outline_size = 1
+shadow_size = 20
+shadow_color = Color(0.139184, 0.351246, 0.332102, 0.682353)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vtqs2"]
+font = ExtResource("4_gpkby")
+font_color = Color(1, 0.923881, 0.910825, 1)
+shadow_size = 5
+shadow_color = Color(1.20327e-08, 0.266708, 0.277312, 0.745098)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ebgsw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 816.0
+offset_bottom = 488.0
+scale = Vector2(1.0051, 0.995511)
+texture = ExtResource("2_52wr0")
+
+[node name="TileCloud3" type="Sprite2D" parent="TextureRect"]
+position = Vector2(35.8172, 40.1804)
+scale = Vector2(0.625, 0.65)
+texture = ExtResource("3_21v2q")
+
+[node name="TileCloud2" type="Sprite2D" parent="TextureRect/TileCloud3"]
+position = Vector2(-18.4, 49.2308)
+scale = Vector2(0.625, 0.65)
+texture = ExtResource("3_21v2q")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 104.0
+offset_right = 592.0
+offset_bottom = 171.0
+text = "LEADERBOARD"
+label_settings = SubResource("LabelSettings_t5aq1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_75ve0")
+bus = &"SFX"
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 416.0
+offset_right = 762.0
+offset_bottom = 461.0
+theme = ExtResource("11_6vldr")
+text = "BACK
+"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(696, 104)
+sprite_frames = SubResource("SpriteFrames_v1e5q")
+animation = &"level_4"
+
+[node name="name" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 408.0
+offset_right = 289.0
+offset_bottom = 454.0
+placeholder_text = "Your Name"
+
+[node name="Save" type="Button" parent="."]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 416.0
+offset_right = 578.0
+offset_bottom = 461.0
+theme = ExtResource("11_6vldr")
+text = "SAVE"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 176.0
+offset_right = 576.0
+offset_bottom = 384.0
+current_tab = 0
+
+[node name="Level 1" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Level 1"]
+offset_left = 24.0
+offset_top = 25.0
+offset_right = 320.0
+offset_bottom = 177.0
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Level 1/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_aqtpn")
+columns = 3
+script = ExtResource("7_mbqmu")
+
+[node name="Level 2" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Level 2"]
+offset_left = 24.0
+offset_top = 25.0
+offset_right = 320.0
+offset_bottom = 177.0
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Level 2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_aqtpn")
+columns = 3
+script = ExtResource("7_mbqmu")
+level = 2
+
+[node name="Level 3" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Level 3"]
+offset_left = 24.0
+offset_top = 25.0
+offset_right = 320.0
+offset_bottom = 177.0
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Level 3/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_aqtpn")
+columns = 3
+script = ExtResource("7_mbqmu")
+level = 3
+
+[node name="Level 4" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Level 4"]
+offset_left = 24.0
+offset_top = 25.0
+offset_right = 320.0
+offset_bottom = 177.0
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Level 4/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_aqtpn")
+columns = 3
+script = ExtResource("7_mbqmu")
+level = 4
+
+[node name="Level 5" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Level 5"]
+offset_left = 24.0
+offset_top = 25.0
+offset_right = 320.0
+offset_bottom = 177.0
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Level 5/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_aqtpn")
+columns = 3
+script = ExtResource("7_mbqmu")
+level = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 280.0
+offset_top = 216.0
+offset_right = -491.0
+offset_bottom = -227.0
+scale = Vector2(0.599999, 0.6)
+text = "No.
+"
+label_settings = SubResource("LabelSettings_17nn0")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 392.0
+offset_top = 216.0
+offset_right = -357.0
+offset_bottom = -227.0
+scale = Vector2(0.599999, 0.6)
+text = "Name
+"
+label_settings = SubResource("LabelSettings_17nn0")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 528.0
+offset_top = 216.0
+offset_right = -206.0
+offset_bottom = -227.0
+scale = Vector2(0.599999, 0.6)
+text = "Time
+"
+label_settings = SubResource("LabelSettings_17nn0")
+
+[node name="TileCloud2" type="Sprite2D" parent="."]
+position = Vector2(472, 40)
+scale = Vector2(0.625, 0.65)
+texture = ExtResource("3_21v2q")
+
+[node name="TileCloud2" type="Sprite2D" parent="TileCloud2"]
+position = Vector2(-18.4, 49.2308)
+scale = Vector2(0.625, 0.65)
+texture = ExtResource("3_21v2q")
+
+[node name="Title2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 16.0
+offset_right = 443.0
+offset_bottom = 109.0
+text = "SHAPESHIFT"
+label_settings = SubResource("LabelSettings_q13ym")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="err" type="Label" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 456.0
+offset_right = 248.0
+offset_bottom = 479.0
+text = "You can read quickly eh?"
+label_settings = SubResource("LabelSettings_vtqs2")
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="text_submitted" from="name" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
+[connection signal="tab_selected" from="TabContainer/Level 1" to="TabContainer/Level 1/ScrollContainer/GridContainer" method="_on_tab_selected"]
+[connection signal="tab_selected" from="TabContainer/Level 2" to="TabContainer/Level 2/ScrollContainer/GridContainer" method="_on_tab_selected"]
+[connection signal="tab_selected" from="TabContainer/Level 3" to="TabContainer/Level 3/ScrollContainer/GridContainer" method="_on_tab_selected"]
+[connection signal="tab_selected" from="TabContainer/Level 4" to="TabContainer/Level 4/ScrollContainer/GridContainer" method="_on_tab_selected"]
+[connection signal="tab_selected" from="TabContainer/Level 5" to="TabContainer/Level 5/ScrollContainer/GridContainer" method="_on_tab_selected"]

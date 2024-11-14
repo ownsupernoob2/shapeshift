@@ -61,6 +61,7 @@ offset_bottom = -39.0
 text = "1.00"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1.8, 1.8, 1.8, 1)
 offset_left = -10.0
 offset_top = -19.0
 offset_right = 61.0

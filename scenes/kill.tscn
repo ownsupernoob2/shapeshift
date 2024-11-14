@@ -36,15 +36,14 @@ offset_bottom = 54.0
 scale = Vector2(0.311229, 0.31121)
 texture = SubResource("GradientTexture2D_7cqis")
 
-[node name="Lava" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_a422v")
-volume_db = -11.243
-pitch_scale = 0.68
-autoplay = true
-bus = &"SFX"
-parameters/looping = true
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-0.18948, -0.00768614)
 scale = Vector2(-0.0792328, -19.9133)
 texture = SubResource("GradientTexture1D_ri8dl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_a422v")
+volume_db = -16.839
+autoplay = true
+bus = &"SFX"
+parameters/looping = true
